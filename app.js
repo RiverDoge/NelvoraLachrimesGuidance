@@ -16,7 +16,6 @@ function loadChampionData(championName, imageName) {
     
     document.getElementById("detail-title").innerText = championName;
     
-    // Set the header image, with a fallback if missing
     const headerImg = document.getElementById("detail-header-image");
     headerImg.src = `assets/champion_art/${imageName}`;
     headerImg.onerror = function() {
@@ -24,7 +23,6 @@ function loadChampionData(championName, imageName) {
         this.src = 'assets/champion_art/Placeholder_12.png';
     };
     
-    // Using the exact CSV names from your repository
     Promise.all([
         fetchCSV("data/Xeryos_Factions_DB.csv"),
         fetchCSV("data/Xeryos_Sub-Factions_DB.csv"),
@@ -45,11 +43,10 @@ function loadChampionData(championName, imageName) {
 }
 
 function populateTabs(faction, subFactions, objectives, individuals, championName) {
-    // Dynamically calculate the leader image path based on the champion name
     const formattedName = championName.replace(/\s+/g, '_');
     const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
 
-    // 1. Faction Dashboard (All fields restored)
+    // 1. Faction Dashboard
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${faction['Faction Name'] || 'Unknown Faction'}</h3>
@@ -57,7 +54,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="leader-profile-bar">
-            <img src="${leaderImg}" alt="Leader Art" class="leader-avatar" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="${leaderImg}" alt="Leader Art" class="leader-avatar" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             <div class="leader-info">
                 <span class="stat-label">Faction Leader</span>
                 <span class="stat-value">${faction['Leader Name'] || 'Unknown'} 
@@ -80,12 +77,12 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
 
         <div class="info-grid">
             <div class="info-panel">
-                <h4>Logistics & Structure</h4>
-                <div class="detail-item"><strong>HQ Location:</strong> ${faction['HQ Location'] || 'Classified'}</div>
-                <div class="detail-item"><strong>HQ Details:</strong> ${faction['HQ Description'] || 'N/A'}</div>
-                <div class="detail-item"><strong>HQ Danger:</strong> <span class="danger-text">${faction['HQ Danger Level'] || 'N/A'}</span></div>
-                <div class="detail-item"><strong>HQ Features:</strong> ${faction['HQ Features'] || 'N/A'}</div>
-                <div class="detail-item"><strong>HQ Accessibility:</strong> ${faction['HQ Accessibility'] || 'N/A'}</div>
+                <h4>Headquarters Information</h4>
+                <div class="detail-item"><strong>Location:</strong> ${faction['HQ Location'] || 'Classified'}</div>
+                <div class="detail-item"><strong>Details:</strong> ${faction['HQ Description'] || 'N/A'}</div>
+                <div class="detail-item"><strong>Danger Level:</strong> <span class="danger-text">${faction['HQ Danger Level'] || 'N/A'}</span></div>
+                <div class="detail-item"><strong>Features:</strong> ${faction['HQ Features'] || 'N/A'}</div>
+                <div class="detail-item"><strong>Accessibility:</strong> ${faction['HQ Accessibility'] || 'N/A'}</div>
             </div>
             <div class="info-panel">
                 <h4>Alignments & Doctrine</h4>
@@ -100,7 +97,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
     `;
 
-    // 2. Sub-Factions
+    // 2. Sub-Factions (Added Enemies)
     let subHtml = "";
     if (subFactions.length === 0) {
         subHtml = "<p>No sub-factions recorded.</p>";
@@ -117,13 +114,14 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                     <span><strong>Leader:</strong> ${sub['Leader Name']}</span>
                     <span><strong>Force Size:</strong> ${sub['Size of Forces']}</span>
                     <span><strong>Alliances:</strong> ${sub['Alliances']}</span>
+                    <span><strong>Enemies:</strong> ${sub['Enemies'] || 'None'}</span>
                 </div>
             </div>`;
         });
     }
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // 3. Objectives
+    // 3. Objectives (Added Objective Giver)
     let objHtml = "";
     if (objectives.length === 0) {
         objHtml = "<p>No active objectives recorded.</p>";
@@ -140,6 +138,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                 </div>
                 <p class="entity-desc">${obj['Description'] || 'No description provided.'}</p>
                 <div class="entity-footer">
+                    <span><strong>Overseer:</strong> ${obj['Objective Giver'] || 'Unknown'}</span>
                     <span><strong>Difficulty:</strong> ${obj['Difficulty']}</span>
                     <span><strong>Location:</strong> ${obj['Location']}</span>
                     <span><strong>Reward:</strong> ${obj['Reward']}</span>
@@ -150,7 +149,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     }
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 4. Individuals
+    // 4. Individuals (Fixed Label, Added Allies and Enemies)
     let indHtml = "";
     if (individuals.length === 0) {
         indHtml = "<p>No notable individuals recorded.</p>";
@@ -166,7 +165,9 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                 <div class="entity-footer">
                     <span><strong>Strengths:</strong> ${ind['Strengths']}</span>
                     <span><strong>Weaknesses:</strong> ${ind['Weaknesses']}</span>
-                    <span><strong>Assoc. Faction:</strong> ${ind['Faction Name']}</span>
+                    <span><strong>Allies:</strong> ${ind['Allies'] || 'None'}</span>
+                    <span><strong>Enemies:</strong> ${ind['Enemies'] || 'None'}</span>
+                    <span><strong>Faction:</strong> ${ind['Faction Name']}</span>
                 </div>
             </div>`;
         });
@@ -192,4 +193,16 @@ function openTab(evt, tabId) {
 function returnToGrid() {
     document.getElementById("champion-details").classList.add("hidden");
     document.getElementById("champion-selection").classList.remove("hidden");
+}
+
+// Lightbox Functions
+function openLightbox(imgSrc) {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    lightboxImg.src = imgSrc;
+    lightbox.classList.remove("hidden");
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").classList.add("hidden");
 }

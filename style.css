@@ -72,15 +72,18 @@ header h1 {
 #champion-details {
     max-width: 900px;
     margin: 0 auto;
+    text-align: center; /* Centers all inner text globally */
 }
 
 .detail-header {
     display: flex;
     align-items: center;
+    justify-content: center; /* Centered Header */
     gap: 30px;
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--xeryos-border);
+    position: relative;
 }
 
 .title-group {
@@ -89,16 +92,16 @@ header h1 {
     gap: 20px;
 }
 
-/* Detail Header Art (Box Removed) */
 .header-art-container {
-    width: 80px;
-    height: 80px;
+    width: 100px; /* Slightly larger for clarity */
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: transparent;
     border: none;
     box-shadow: none;
+    cursor: pointer; /* Indicates it can be clicked */
 }
 
 #detail-header-image {
@@ -106,6 +109,11 @@ header h1 {
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 10px var(--xeryos-crimson-bright));
+    transition: transform 0.2s ease;
+}
+
+#detail-header-image:hover {
+    transform: scale(1.05);
 }
 
 .detail-header h2 {
@@ -124,6 +132,8 @@ header h1 {
     border-radius: 4px;
     font-weight: 600;
     transition: all 0.2s ease;
+    position: absolute;
+    left: 0; /* Keeps button on the left while title centers */
 }
 
 .back-btn:hover {
@@ -135,6 +145,7 @@ header h1 {
 /* --- Tab Navigation --- */
 .tab-menu {
     display: flex;
+    justify-content: center; /* Centers the tabs */
     gap: 5px;
     margin-bottom: 25px;
     border-bottom: 2px solid var(--xeryos-border);
@@ -195,27 +206,34 @@ header h1 {
     background: var(--xeryos-panel);
     border: 1px solid var(--xeryos-border);
     border-radius: 6px;
-    padding: 15px 20px;
+    padding: 20px;
     margin-bottom: 30px;
     align-items: center;
-    gap: 25px;
+    justify-content: center; /* Centered content */
+    gap: 30px;
     flex-wrap: wrap;
 }
 
 .leader-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 4px;
+    width: 90px; /* Increased size for leader */
+    height: 90px;
+    border-radius: 6px;
     object-fit: contain;
-    border: 1px solid var(--xeryos-border);
+    border: none;
     background-color: transparent;
-    filter: drop-shadow(0 0 5px var(--xeryos-crimson-bright));
+    filter: drop-shadow(0 0 6px rgba(220, 20, 60, 0.5));
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.leader-avatar:hover {
+    transform: scale(1.05);
 }
 
 .leader-info {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; 
+    align-items: center;
 }
 
 .stat-box {
@@ -285,7 +303,7 @@ header h1 {
 .entity-card {
     background: var(--xeryos-panel);
     border: 1px solid var(--xeryos-border);
-    border-left: 4px solid var(--xeryos-crimson-bright);
+    border-top: 4px solid var(--xeryos-crimson-bright); /* Moved border to top for centered symmetry */
     border-radius: 6px;
     padding: 20px;
     margin-bottom: 20px;
@@ -293,9 +311,10 @@ header h1 {
 
 .entity-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Stacked for center alignment */
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    gap: 10px;
 }
 
 .entity-header h3 {
@@ -325,7 +344,9 @@ header h1 {
 
 .entity-footer {
     display: flex;
-    gap: 30px;
+    justify-content: center; /* Centered footer elements */
+    flex-wrap: wrap;
+    gap: 20px;
     border-top: 1px solid var(--xeryos-border);
     padding-top: 15px;
     font-size: 0.95rem;
@@ -334,4 +355,32 @@ header h1 {
 .entity-footer span strong {
     color: var(--text-muted);
     margin-right: 5px;
+}
+
+/* Lightbox Styling */
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: zoom-out;
+}
+
+#lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(220, 20, 60, 0.4);
+    animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }

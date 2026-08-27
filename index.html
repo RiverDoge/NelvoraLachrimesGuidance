@@ -34,7 +34,7 @@
             <button class="back-btn" onclick="returnToGrid()">Return to Champions</button>
             <div class="title-group">
                 <div class="header-art-container">
-                    <img id="detail-header-image" src="" alt="Champion Art">
+                    <img id="detail-header-image" src="" alt="Champion Art" onclick="openLightbox(this.src)">
                 </div>
                 <h2 id="detail-title">Champion Name</h2>
             </div>
@@ -52,6 +52,11 @@
         <div id="tab-objectives" class="tab-content"></div>
         <div id="tab-individuals" class="tab-content"></div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="hidden" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Full Size Art">
+    </div>
 
     <script src="app.js"></script>
 </body>
