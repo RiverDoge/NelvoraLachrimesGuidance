@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forces of Xeryos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body class="theme-xeryos">
+
+    <header>
+        <h1>Forces of Xeryos</h1>
+    </header>
+
+    <main id="champion-selection">
+        <div class="champion-grid" id="grid-container">
+            <img src="assets/champion_art/Cherished.png" alt="Cherished" class="champion-image-btn" onclick="loadChampionData('Cherished')">
+            <img src="assets/champion_art/The_Reverent_Heart.png" alt="The Reverent Heart" class="champion-image-btn" onclick="loadChampionData('The Reverent Heart')">
+            <img src="assets/champion_art/Voice_of_the_Archon.png" alt="Voice of the Archon" class="champion-image-btn" onclick="loadChampionData('Voice of the Archon')">
+            <img src="assets/champion_art/Scorned_Blades.png" alt="Scorned Blades" class="champion-image-btn" onclick="loadChampionData('Scorned Blades')">
+            <img src="assets/champion_art/Mornings_Song.png" alt="Morning’s Song" class="champion-image-btn" onclick="loadChampionData('Morning’s Song')">
+            <img src="assets/champion_art/The_Pure.png" alt="The Pure" class="champion-image-btn" onclick="loadChampionData('The Pure')">
+            <img src="assets/champion_art/Benevolence.png" alt="Benevolence" class="champion-image-btn" onclick="loadChampionData('Benevolence')">
+            <img src="assets/champion_art/Virtuous_Storm.png" alt="Virtuous Storm" class="champion-image-btn" onclick="loadChampionData('Virtuous Storm')">
+            <img src="assets/champion_art/Blessed_Limb_of_Justice.png" alt="Blessed Limb of Justice" class="champion-image-btn" onclick="loadChampionData('Blessed Limb of Justice')">
+            <img src="assets/champion_art/Iridescent_Bastion.png" alt="Iridescent Bastion" class="champion-image-btn" onclick="loadChampionData('Iridescent Bastion')">
+            <img src="assets/champion_art/The_Unfurled.png" alt="The Unfurled" class="champion-image-btn" onclick="loadChampionData('The Unfurled')">
+            <img src="assets/champion_art/Placeholder_12.png" alt="Placeholder 12" class="champion-image-btn" onclick="loadChampionData('Placeholder 12')">
+        </div>
+    </main>
+
+    <section id="champion-details" class="hidden">
+        <div class="detail-header">
+            <button class="back-btn" onclick="returnToGrid()">Return to Roster</button>
+            <h2 id="detail-title">Champion Name</h2>
+        </div>
+        
+        <div class="tab-menu">
+            <button class="tab-link active" onclick="openTab(event, 'tab-faction')">Faction Info</button>
+            <button class="tab-link" onclick="openTab(event, 'tab-subfactions')">Sub-Factions</button>
+            <button class="tab-link" onclick="openTab(event, 'tab-objectives')">Objectives</button>
+            <button class="tab-link" onclick="openTab(event, 'tab-individuals')">Individuals</button>
+        </div>
+
+        <div id="tab-faction" class="tab-content active"></div>
+        <div id="tab-subfactions" class="tab-content"></div>
+        <div id="tab-objectives" class="tab-content"></div>
+        <div id="tab-individuals" class="tab-content"></div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+/* Core Palette */
+:root {
+    --xeryos-bg: #0a0a0a;
+    --xeryos-panel: #141414;
+    --xeryos-border: #2a2a2a;
+    --xeryos-crimson-dark: #660000;
+    --xeryos-crimson-bright: #dc143c;
+    --text-main: #e0e0e0;
+    --text-muted: #888888;
+}
+
+* { box-sizing: border-box; }
+
+body.theme-xeryos {
+    background-color: var(--xeryos-bg);
+    color: var(--text-main);
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px; /* Reduced to bring everything up */
+    line-height: 1.5;
+}
+
+header h1 {
+    text-align: center;
+    color: var(--xeryos-crimson-bright);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 0;
+    margin-bottom: 25px; /* Reduced to pull grid higher */
+    font-size: 2.2rem;
+}
+
+/* --- Champion Image Grid (Compact 4x3) --- */
+.champion-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; /* Tighter gap */
+    max-width: 800px; /* Much smaller max-width keeps images compact */
+    margin: 0 auto;
+    justify-items: center;
+}
+
+.champion-image-btn {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain; /* Ensures the art isn't cropped */
+    cursor: pointer;
+    background-color: transparent; /* Removed card background */
+    border: none; /* Removed physical box border */
+    transition: transform 0.2s ease, filter 0.2s ease;
+    /* Invisible initial drop shadow for smooth transition */
+    filter: drop-shadow(0 0 0 rgba(220, 20, 60, 0)); 
+}
+
+.champion-image-btn:hover {
+    transform: translateY(-4px);
+    /* Drop shadow traces the transparent PNG shape perfectly */
+    filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright));
+}
+
+@media (max-width: 768px) {
+    .champion-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Detail View Layout --- */
+.hidden { display: none !important; }
+
+#champion-details {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--xeryos-border);
+}
+
+.detail-header h2 {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.back-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--xeryos-border);
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background: var(--xeryos-panel);
+    color: var(--xeryos-crimson-bright);
+    border-color: var(--xeryos-crimson-bright);
+}
+
+/* --- Tab Navigation --- */
+.tab-menu {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--xeryos-border);
+}
+
+.tab-link {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px; 
+    transition: all 0.2s ease;
+}
+
+.tab-link:hover {
+    color: var(--text-main);
+    background: var(--xeryos-panel);
+}
+
+.tab-link.active {
+    color: var(--xeryos-crimson-bright);
+    border-bottom-color: var(--xeryos-crimson-bright);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: quickFade 0.3s ease-out; }
+
+@keyframes quickFade {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Advanced Dashboard Formatting --- */
+
+/* Faction Hero & Stats */
+.faction-hero {
+    margin-bottom: 25px;
+}
+
+.faction-hero h3 {
+    color: var(--xeryos-crimson-bright);
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
+}
+
+.faction-desc {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 0;
+}
+
+.stats-bar {
+    display: flex;
+    background: var(--xeryos-panel);
+    border: 1px solid var(--xeryos-border);
+    border-radius: 6px;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    color: var(--text-main);
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.stat-value.highlight {
+    color: var(--xeryos-crimson-bright);
+}
+
+/* Split Info Panels */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.info-panel {
+    background: var(--xeryos-panel);
+    border: 1px solid var(--xeryos-border);
+    border-top: 3px solid var(--xeryos-crimson-dark);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.info-panel h4 {
+    margin-top: 0;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--xeryos-border);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.detail-item {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.detail-item strong {
+    color: var(--text-muted);
+    margin-right: 5px;
+}
+
+/* Entity Cards (Sub-Factions, Objectives, Individuals) */
+.entity-card {
+    background: var(--xeryos-panel);
+    border: 1px solid var(--xeryos-border);
+    border-left: 4px solid var(--xeryos-crimson-bright);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.entity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.entity-header h3 {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 1.4rem;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.badge-danger { background: var(--xeryos-crimson-dark); color: #fff; }
+.badge-neutral { background: #333; color: var(--text-main); }
+.badge-highlight { border: 1px solid var(--xeryos-crimson-bright); color: var(--xeryos-crimson-bright); }
+
+.entity-desc {
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.entity-footer {
+    display: flex;
+    gap: 30px;
+    border-top: 1px solid var(--xeryos-border);
+    padding-top: 15px;
+    font-size: 0.95rem;
+}
+
+.entity-footer span strong {
+    color: var(--text-muted);
+    margin-right: 5px;
+}
