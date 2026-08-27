@@ -58,7 +58,6 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     const formattedName = championName.replace(/\s+/g, '_');
     const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
 
-    // Aggregate all unique faction names (Main and Sub) for the dropdown filters
     const allFactions = [];
     if (faction['Faction Name']) allFactions.push(faction['Faction Name']);
     subFactions.forEach(sub => { if (sub['Faction Name']) allFactions.push(sub['Faction Name']); });
@@ -75,13 +74,13 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="leader-combo-box">
+            <!-- 1. Left Portrait Column -->
             <div class="leader-portrait-frame">
-                <img src="${leaderImg}" alt="Leader Art" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+                <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             </div>
             
+            <!-- 2. Middle Info Column -->
             <div class="leader-info-card">
-                <span class="top-right-badge badge-danger">CR: ${formatData(faction['Leader Danger'])}</span>
-                
                 <div class="leader-title-wrap">
                     <span class="stat-label">Faction Leader</span>
                     <h4>${formatData(faction['Leader Name'])}</h4>
@@ -92,6 +91,12 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                     <div class="stat-block"><span class="stat-label">Overall Danger</span><span class="stat-value danger-text">${formatData(faction['Overall Danger Level'])}</span></div>
                 </div>
             </div>
+
+            <!-- 3. Right Spacer Column (Forces Perfect Centering) -->
+            <div class="leader-spacer"></div>
+
+            <!-- Absolute Top Right Badge -->
+            <span class="top-right-badge badge-danger">CR: ${formatData(faction['Leader Danger'])}</span>
         </div>
 
         <div class="info-grid">
