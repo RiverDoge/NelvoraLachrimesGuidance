@@ -107,8 +107,11 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     border: 1px solid var(--xeryos-border);
     border-radius: 12px; 
     padding: 30px;
-    /* Centered, uniform shadow so it rests flat */
-    box-shadow: 0 0 40px rgba(0,0,0,0.85); 
+    box-shadow: 
+        3px 3px 0 #181818, 
+        6px 6px 0 #0d0d0d, 
+        9px 9px 0 #050505, 
+        0 15px 30px rgba(0,0,0,0.8);
     width: 100%;
 }
 
@@ -137,6 +140,8 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     transition: all 0.2s ease;
     text-align: left;
     white-space: nowrap;
+    outline: 1px dashed rgba(255,255,255,0.1);
+    outline-offset: -4px;
 }
 
 .bookmark-link:hover {
@@ -149,6 +154,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     background: var(--xeryos-crimson-dark);
     color: #fff;
     border-color: var(--xeryos-crimson-bright);
+    outline-color: rgba(255,255,255,0.3);
     padding-left: 30px; 
 }
 
@@ -235,56 +241,39 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 }
 
 /* --- Base Info --- */
-.faction-hero { margin-bottom: 35px; }
+.faction-hero { margin-bottom: 25px; }
 .faction-hero h3 { color: var(--xeryos-crimson-bright); font-size: 2.2rem; margin: 0 0 5px 0; }
 .faction-hero p { color: var(--text-muted); font-size: 1.25rem; margin: 0; font-style: italic; }
 
-/* Refined Leader Showcase */
 .leader-horizontal-card {
     background: var(--xeryos-card);
     border: 1px solid var(--xeryos-border);
     border-top: 3px solid var(--xeryos-crimson-dark);
     border-radius: 12px; 
-    /* Heavy left padding forces the text to center within the remaining visual space */
-    padding: 20px 20px 20px 140px; 
+    padding: 30px; /* Restored uniform padding */
     display: flex;
-    flex-direction: column; 
+    flex-direction: row; 
     align-items: center;
     justify-content: center;
-    position: relative; 
-    min-height: 180px;
+    gap: 40px; /* Spacing between portrait and text */
     margin-bottom: 30px;
+    position: relative; 
 }
 
-.leader-portrait-frame {
-    position: absolute;
-    left: -30px; /* Pushes it outside the left edge */
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--xeryos-bg);
-    border: 1px solid var(--xeryos-border);
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
-    z-index: 5;
+@media (max-width: 650px) {
+    .leader-horizontal-card { flex-direction: column; }
 }
 
 .leader-portrait-large {
-    width: 130px; 
-    height: 130px;
+    width: 140px; 
+    height: 140px;
     object-fit: contain;
     cursor: pointer;
     filter: drop-shadow(0 0 10px var(--xeryos-crimson-dark));
     transition: transform 0.2s ease;
-    display: block;
+    flex-shrink: 0;
 }
 .leader-portrait-large:hover { transform: scale(1.05); }
-
-/* Mobile fallback to stack the leader card vertically */
-@media (max-width: 650px) {
-    .leader-horizontal-card { padding: 120px 20px 20px 20px; margin-top: 60px; }
-    .leader-portrait-frame { left: 50%; top: 0; transform: translate(-50%, -50%); }
-}
 
 .leader-info-block {
     display: flex;
@@ -366,7 +355,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .danger-text { color: var(--xeryos-crimson-bright); font-weight: bold; }
 .ghost-text { color: #555; font-style: italic; font-weight: normal; }
 
-/* --- Pinned Field Notes (Entity Cards) --- */
+/* --- Entity Cards --- */
 .entity-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -382,24 +371,6 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     flex-direction: column;
     align-items: center;
     position: relative; 
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.field-note-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-}
-
-.field-note-card::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--xeryos-crimson-bright);
 }
 
 /* The Top Right Badge */

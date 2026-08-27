@@ -58,6 +58,14 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     const formattedName = championName.replace(/\s+/g, '_');
     const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
 
+    // Aggregate all unique faction names (Main and Sub) for the dropdown filters
+    const allFactions = [faction['Faction Name']];
+    subFactions.forEach(sub => allFactions.push(sub['Faction Name']));
+    objectives.forEach(obj => allFactions.push(obj['Faction Name']));
+    individuals.forEach(ind => allFactions.push(ind['Faction Name']));
+    
+    const uniqueFactions = [...new Set(allFactions.filter(f => f && f.trim() !== '' && f.toLowerCase() !== 'unknown' && f.toLowerCase() !== 'n/a'))];
+
     // 1. FACTION INFO TAB
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
@@ -66,12 +74,8 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="base-card leader-horizontal-card">
-            <!-- Overlapping Portrait Frame -->
-            <div class="leader-portrait-frame">
-                <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
-            </div>
-            
             <span class="top-right-badge badge-danger">CR: ${formatData(faction['Leader Danger'])}</span>
+            <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             
             <div class="leader-info-block">
                 <div class="leader-title-wrap">
@@ -131,18 +135,17 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
     // 3. OBJECTIVES TAB
-    const objFactions = [...new Set(objectives.map(obj => obj['Faction Name']).filter(f => f && f.trim() !== ''))];
     let objHtml = '';
     
     if (objectives.length === 0) {
-        objHtml += "<p class='ghost-text'>No active objectives recorded.</p>";
+        objHtml += "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No active objectives recorded.</p></div>";
     } else {
         objHtml += `
             <div class="filter-container">
                 <label for="obj-filter">Filter by Faction:</label>
                 <select id="obj-filter" onchange="filterCards('tab-objectives', this.value)">
                     <option value="All">All Factions</option>
-                    ${objFactions.map(f => `<option value="${f}">${f}</option>`).join('')}
+                    ${uniqueFactions.map(f => `<option value="${f}">${f}</option>`).join('')}
                 </select>
             </div>
             <div class="entity-grid">
@@ -170,18 +173,17 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
     // 4. INDIVIDUALS TAB
-    const indFactions = [...new Set(individuals.map(ind => ind['Faction Name']).filter(f => f && f.trim() !== ''))];
     let indHtml = '';
     
     if (individuals.length === 0) {
-        indHtml += "<p class='ghost-text'>No notable individuals recorded.</p>";
+        indHtml += "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No notable individuals recorded.</p></div>";
     } else {
         indHtml += `
             <div class="filter-container">
                 <label for="ind-filter">Filter by Faction:</label>
                 <select id="ind-filter" onchange="filterCards('tab-individuals', this.value)">
                     <option value="All">All Factions</option>
-                    ${indFactions.map(f => `<option value="${f}">${f}</option>`).join('')}
+                    ${uniqueFactions.map(f => `<option value="${f}">${f}</option>`).join('')}
                 </select>
             </div>
             <div class="entity-grid">
