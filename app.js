@@ -24,9 +24,10 @@ function loadChampionData(championName, imageName) {
         this.src = 'assets/champion_art/Placeholder_12.png';
     };
     
+    // Using the exact CSV names from your repository
     Promise.all([
         fetchCSV("data/Xeryos_Factions_DB.csv"),
-        fetchCSV("data/Xeryos_Sub-Factions_DB.csv"), // Fixed hyphen to match your repo
+        fetchCSV("data/Xeryos_Sub-Factions_DB.csv"),
         fetchCSV("data/Xeryos_Objectives_DB.csv"),
         fetchCSV("data/Xeryos_Individuals_DB.csv")
     ]).then(([factions, subFactions, objectives, individuals]) => {
@@ -36,24 +37,32 @@ function loadChampionData(championName, imageName) {
         const objectiveData = objectives.filter(row => row.Champion === championName);
         const individualData = individuals.filter(row => row.Champion === championName);
         
-        populateTabs(factionData, subFactionData, objectiveData, individualData);
+        populateTabs(factionData, subFactionData, objectiveData, individualData, championName);
     }).catch(error => {
         console.error("Data Load Error:", error);
         document.getElementById("tab-faction").innerHTML = `<p style="color:var(--xeryos-crimson-bright); font-weight:bold;">Error loading data. If you are opening this locally from your desktop, your browser is blocking CSV access. Please view via GitHub Pages or a local web server.</p>`;
     });
 }
 
-function populateTabs(faction, subFactions, objectives, individuals) {
+function populateTabs(faction, subFactions, objectives, individuals, championName) {
+    // Dynamically calculate the leader image path based on the champion name
+    const formattedName = championName.replace(/\s+/g, '_');
+    const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
+
+    // 1. Faction Dashboard (All fields restored)
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${faction['Faction Name'] || 'Unknown Faction'}</h3>
             <p class="faction-desc">${faction['Faction Description'] || 'No official description registered.'}</p>
         </div>
         
-        <div class="stats-bar">
-            <div class="stat-box">
-                <span class="stat-label">Leader</span>
-                <span class="stat-value">${faction['Leader Name'] || 'Unknown'}</span>
+        <div class="leader-profile-bar">
+            <img src="${leaderImg}" alt="Leader Art" class="leader-avatar" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <div class="leader-info">
+                <span class="stat-label">Faction Leader</span>
+                <span class="stat-value">${faction['Leader Name'] || 'Unknown'} 
+                    <span class="danger-text" style="font-size:0.9rem; margin-left:8px;">(Danger: ${faction['Leader Danger'] || 'Unknown'})</span>
+                </span>
             </div>
             <div class="stat-box">
                 <span class="stat-label">Combat Style</span>
@@ -74,18 +83,24 @@ function populateTabs(faction, subFactions, objectives, individuals) {
                 <h4>Logistics & Structure</h4>
                 <div class="detail-item"><strong>HQ Location:</strong> ${faction['HQ Location'] || 'Classified'}</div>
                 <div class="detail-item"><strong>HQ Details:</strong> ${faction['HQ Description'] || 'N/A'}</div>
-                <div class="detail-item"><strong>Unique Abilities:</strong> ${faction['Unique Abilities'] || 'None logged'}</div>
+                <div class="detail-item"><strong>HQ Danger:</strong> <span class="danger-text">${faction['HQ Danger Level'] || 'N/A'}</span></div>
+                <div class="detail-item"><strong>HQ Features:</strong> ${faction['HQ Features'] || 'N/A'}</div>
+                <div class="detail-item"><strong>HQ Accessibility:</strong> ${faction['HQ Accessibility'] || 'N/A'}</div>
             </div>
             <div class="info-panel">
                 <h4>Alignments & Doctrine</h4>
+                <div class="detail-item"><strong>Unique Abilities:</strong> ${faction['Unique Abilities'] || 'None logged'}</div>
                 <div class="detail-item"><strong>Strengths:</strong> ${faction['Strengths'] || 'Unknown'}</div>
                 <div class="detail-item"><strong>Weaknesses:</strong> ${faction['Weaknesses'] || 'Unknown'}</div>
+                <div class="detail-item"><strong>Likes / Dislikes:</strong> ${faction['Likes'] || 'N/A'} / ${faction['Dislikes'] || 'N/A'}</div>
+                <div class="detail-item"><strong>Interests:</strong> ${faction['Interests'] || 'N/A'}</div>
                 <div class="detail-item"><strong>Alliances:</strong> ${faction['Alliances'] || 'None'}</div>
                 <div class="detail-item"><strong>Enemies:</strong> ${faction['Enemies'] || 'None'}</div>
             </div>
         </div>
     `;
 
+    // 2. Sub-Factions
     let subHtml = "";
     if (subFactions.length === 0) {
         subHtml = "<p>No sub-factions recorded.</p>";
@@ -108,6 +123,7 @@ function populateTabs(faction, subFactions, objectives, individuals) {
     }
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
+    // 3. Objectives
     let objHtml = "";
     if (objectives.length === 0) {
         objHtml = "<p>No active objectives recorded.</p>";
@@ -127,12 +143,14 @@ function populateTabs(faction, subFactions, objectives, individuals) {
                     <span><strong>Difficulty:</strong> ${obj['Difficulty']}</span>
                     <span><strong>Location:</strong> ${obj['Location']}</span>
                     <span><strong>Reward:</strong> ${obj['Reward']}</span>
+                    <span><strong>Faction:</strong> ${obj['Faction Name']}</span>
                 </div>
             </div>`;
         });
     }
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
+    // 4. Individuals
     let indHtml = "";
     if (individuals.length === 0) {
         indHtml = "<p>No notable individuals recorded.</p>";

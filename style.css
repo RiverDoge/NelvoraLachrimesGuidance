@@ -89,23 +89,20 @@ header h1 {
     gap: 20px;
 }
 
+/* Detail Header Art (Box Removed) */
 .header-art-container {
     width: 80px;
     height: 80px;
-    background-color: var(--xeryos-panel);
-    border: 1px solid var(--xeryos-border);
-    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(220, 20, 60, 0.15);
 }
 
 #detail-header-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px var(--xeryos-crimson-bright));
 }
 
 .detail-header h2 {
@@ -173,7 +170,6 @@ header h1 {
 
 /* --- Advanced Dashboard Formatting --- */
 
-/* Faction Hero & Stats */
 .faction-hero {
     margin-bottom: 25px;
 }
@@ -190,14 +186,32 @@ header h1 {
     margin-top: 0;
 }
 
-.stats-bar {
+/* Leader Profile Bar */
+.leader-profile-bar {
     display: flex;
     background: var(--xeryos-panel);
     border: 1px solid var(--xeryos-border);
     border-radius: 6px;
     padding: 15px 20px;
     margin-bottom: 30px;
-    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.leader-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid var(--xeryos-border);
+    background-color: #000;
+}
+
+.leader-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
 }
 
 .stat-box {
@@ -222,6 +236,11 @@ header h1 {
 
 .stat-value.highlight {
     color: var(--xeryos-crimson-bright);
+}
+
+.danger-text {
+    color: var(--xeryos-crimson-bright);
+    font-weight: bold;
 }
 
 /* Split Info Panels */
