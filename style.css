@@ -72,13 +72,13 @@ header h1 {
 #champion-details {
     max-width: 900px;
     margin: 0 auto;
-    text-align: center; /* Centers all inner text globally */
+    text-align: center; /* Forces global centering */
 }
 
 .detail-header {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centered Header */
+    justify-content: center;
     gap: 30px;
     margin-bottom: 20px;
     padding-bottom: 20px;
@@ -89,11 +89,13 @@ header h1 {
 .title-group {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
 }
 
+/* Detail Header Art (Box Removed) */
 .header-art-container {
-    width: 100px; /* Slightly larger for clarity */
+    width: 100px; 
     height: 100px;
     display: flex;
     justify-content: center;
@@ -101,7 +103,7 @@ header h1 {
     background-color: transparent;
     border: none;
     box-shadow: none;
-    cursor: pointer; /* Indicates it can be clicked */
+    cursor: pointer;
 }
 
 #detail-header-image {
@@ -133,7 +135,7 @@ header h1 {
     font-weight: 600;
     transition: all 0.2s ease;
     position: absolute;
-    left: 0; /* Keeps button on the left while title centers */
+    left: 0;
 }
 
 .back-btn:hover {
@@ -145,7 +147,7 @@ header h1 {
 /* --- Tab Navigation --- */
 .tab-menu {
     display: flex;
-    justify-content: center; /* Centers the tabs */
+    justify-content: center;
     gap: 5px;
     margin-bottom: 25px;
     border-bottom: 2px solid var(--xeryos-border);
@@ -185,7 +187,7 @@ header h1 {
 /* --- Advanced Dashboard Formatting --- */
 
 .faction-hero {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .faction-hero h3 {
@@ -200,40 +202,60 @@ header h1 {
     margin-top: 0;
 }
 
-/* Leader Profile Bar */
-.leader-profile-bar {
+/* Dedicated Leader Showcase */
+.leader-showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.leader-portrait {
+    width: 140px;
+    height: 140px;
+    border-radius: 8px;
+    object-fit: contain;
+    background-color: transparent;
+    filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright));
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    margin-bottom: 15px;
+}
+
+.leader-portrait:hover {
+    transform: scale(1.05);
+}
+
+.leader-title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.leader-name {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.leader-subtitle {
+    margin: 0;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+}
+
+.stats-bar {
     display: flex;
     background: var(--xeryos-panel);
     border: 1px solid var(--xeryos-border);
     border-radius: 6px;
-    padding: 20px;
+    padding: 15px 20px;
     margin-bottom: 30px;
-    align-items: center;
-    justify-content: center; /* Centered content */
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.leader-avatar {
-    width: 90px; /* Increased size for leader */
-    height: 90px;
-    border-radius: 6px;
-    object-fit: contain;
-    border: none;
-    background-color: transparent;
-    filter: drop-shadow(0 0 6px rgba(220, 20, 60, 0.5));
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.leader-avatar:hover {
-    transform: scale(1.05);
-}
-
-.leader-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-evenly; /* Evenly spaces the 3 remaining stats */
 }
 
 .stat-box {
@@ -278,6 +300,9 @@ header h1 {
     border-top: 3px solid var(--xeryos-crimson-dark);
     border-radius: 6px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers panel contents */
 }
 
 .info-panel h4 {
@@ -287,11 +312,13 @@ header h1 {
     padding-bottom: 8px;
     margin-bottom: 15px;
     font-size: 1.1rem;
+    width: 100%;
 }
 
 .detail-item {
     margin-bottom: 10px;
     line-height: 1.4;
+    text-align: center;
 }
 
 .detail-item strong {
@@ -303,7 +330,7 @@ header h1 {
 .entity-card {
     background: var(--xeryos-panel);
     border: 1px solid var(--xeryos-border);
-    border-top: 4px solid var(--xeryos-crimson-bright); /* Moved border to top for centered symmetry */
+    border-top: 4px solid var(--xeryos-crimson-bright);
     border-radius: 6px;
     padding: 20px;
     margin-bottom: 20px;
@@ -311,7 +338,7 @@ header h1 {
 
 .entity-header {
     display: flex;
-    flex-direction: column; /* Stacked for center alignment */
+    flex-direction: column;
     align-items: center;
     margin-bottom: 15px;
     gap: 10px;
@@ -340,11 +367,12 @@ header h1 {
     color: var(--text-muted);
     font-style: italic;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .entity-footer {
     display: flex;
-    justify-content: center; /* Centered footer elements */
+    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
     border-top: 1px solid var(--xeryos-border);

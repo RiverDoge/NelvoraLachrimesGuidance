@@ -16,6 +16,7 @@ function loadChampionData(championName, imageName) {
     
     document.getElementById("detail-title").innerText = championName;
     
+    // Set the header image
     const headerImg = document.getElementById("detail-header-image");
     headerImg.src = `assets/champion_art/${imageName}`;
     headerImg.onerror = function() {
@@ -53,14 +54,16 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
             <p class="faction-desc">${faction['Faction Description'] || 'No official description registered.'}</p>
         </div>
         
-        <div class="leader-profile-bar">
-            <img src="${leaderImg}" alt="Leader Art" class="leader-avatar" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
-            <div class="leader-info">
-                <span class="stat-label">Faction Leader</span>
-                <span class="stat-value">${faction['Leader Name'] || 'Unknown'} 
-                    <span class="danger-text" style="font-size:0.9rem; margin-left:8px;">(Danger: ${faction['Leader Danger'] || 'Unknown'})</span>
-                </span>
+        <div class="leader-showcase">
+            <img src="${leaderImg}" alt="Leader Art" class="leader-portrait" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <div class="leader-title-wrap">
+                <h4 class="leader-name">${faction['Leader Name'] || 'Unknown'}</h4>
+                <span class="badge badge-danger">CR: ${faction['Leader Danger'] || 'Unknown'}</span>
             </div>
+            <p class="leader-subtitle">Faction Leader</p>
+        </div>
+
+        <div class="stats-bar">
             <div class="stat-box">
                 <span class="stat-label">Combat Style</span>
                 <span class="stat-value">${faction['Combat Style'] || 'Variable'}</span>
@@ -97,7 +100,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
     `;
 
-    // 2. Sub-Factions (Added Enemies)
+    // 2. Sub-Factions
     let subHtml = "";
     if (subFactions.length === 0) {
         subHtml = "<p>No sub-factions recorded.</p>";
@@ -113,7 +116,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                 <div class="entity-footer">
                     <span><strong>Leader:</strong> ${sub['Leader Name']}</span>
                     <span><strong>Force Size:</strong> ${sub['Size of Forces']}</span>
-                    <span><strong>Alliances:</strong> ${sub['Alliances']}</span>
+                    <span><strong>Alliances:</strong> ${sub['Alliances'] || 'None'}</span>
                     <span><strong>Enemies:</strong> ${sub['Enemies'] || 'None'}</span>
                 </div>
             </div>`;
@@ -121,7 +124,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     }
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // 3. Objectives (Added Objective Giver)
+    // 3. Objectives
     let objHtml = "";
     if (objectives.length === 0) {
         objHtml = "<p>No active objectives recorded.</p>";
@@ -149,7 +152,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     }
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 4. Individuals (Fixed Label, Added Allies and Enemies)
+    // 4. Individuals
     let indHtml = "";
     if (individuals.length === 0) {
         indHtml = "<p>No notable individuals recorded.</p>";
