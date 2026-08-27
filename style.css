@@ -73,10 +73,23 @@ header h1 {
 .detail-header {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 30px;
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid var(--xeryos-border);
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#detail-header-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px var(--xeryos-crimson-bright));
 }
 
 .detail-header h2 {

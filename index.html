@@ -14,25 +14,28 @@
 
     <main id="champion-selection">
         <div class="champion-grid" id="grid-container">
-            <img src="assets/champion_art/Cherished.png" alt="Cherished" class="champion-image-btn" onclick="loadChampionData('Cherished')">
-            <img src="assets/champion_art/The_Reverent_Heart.png" alt="The Reverent Heart" class="champion-image-btn" onclick="loadChampionData('The Reverent Heart')">
-            <img src="assets/champion_art/Voice_of_the_Archon.png" alt="Voice of the Archon" class="champion-image-btn" onclick="loadChampionData('Voice of the Archon')">
-            <img src="assets/champion_art/Scorned_Blades.png" alt="Scorned Blades" class="champion-image-btn" onclick="loadChampionData('Scorned Blades')">
-            <img src="assets/champion_art/Mornings_Song.png" alt="Morning’s Song" class="champion-image-btn" onclick="loadChampionData('Morning’s Song')">
-            <img src="assets/champion_art/The_Pure.png" alt="The Pure" class="champion-image-btn" onclick="loadChampionData('The Pure')">
-            <img src="assets/champion_art/Benevolence.png" alt="Benevolence" class="champion-image-btn" onclick="loadChampionData('Benevolence')">
-            <img src="assets/champion_art/Virtuous_Storm.png" alt="Virtuous Storm" class="champion-image-btn" onclick="loadChampionData('Virtuous Storm')">
-            <img src="assets/champion_art/Blessed_Limb_of_Justice.png" alt="Blessed Limb of Justice" class="champion-image-btn" onclick="loadChampionData('Blessed Limb of Justice')">
-            <img src="assets/champion_art/Iridescent_Bastion.png" alt="Iridescent Bastion" class="champion-image-btn" onclick="loadChampionData('Iridescent Bastion')">
-            <img src="assets/champion_art/The_Unfurled.png" alt="The Unfurled" class="champion-image-btn" onclick="loadChampionData('The Unfurled')">
-            <img src="assets/champion_art/Placeholder_12.png" alt="Placeholder 12" class="champion-image-btn" onclick="loadChampionData('Placeholder 12')">
+            <img src="assets/champion_art/Cherished.png" alt="Cherished" class="champion-image-btn" onclick="loadChampionData('Cherished', 'Cherished.png')">
+            <img src="assets/champion_art/The_Reverent_Heart.png" alt="The Reverent Heart" class="champion-image-btn" onclick="loadChampionData('The Reverent Heart', 'The_Reverent_Heart.png')">
+            <img src="assets/champion_art/Voice_of_the_Archon.png" alt="Voice of the Archon" class="champion-image-btn" onclick="loadChampionData('Voice of the Archon', 'Voice_of_the_Archon.png')">
+            <img src="assets/champion_art/Scorned_Blades.png" alt="Scorned Blades" class="champion-image-btn" onclick="loadChampionData('Scorned Blades', 'Scorned_Blades.png')">
+            <img src="assets/champion_art/Mornings_Song.png" alt="Morning’s Song" class="champion-image-btn" onclick="loadChampionData('Morning’s Song', 'Mornings_Song.png')">
+            <img src="assets/champion_art/The_Pure.png" alt="The Pure" class="champion-image-btn" onclick="loadChampionData('The Pure', 'The_Pure.png')">
+            <img src="assets/champion_art/Benevolence.png" alt="Benevolence" class="champion-image-btn" onclick="loadChampionData('Benevolence', 'Benevolence.png')">
+            <img src="assets/champion_art/Virtuous_Storm.png" alt="Virtuous Storm" class="champion-image-btn" onclick="loadChampionData('Virtuous Storm', 'Virtuous_Storm.png')">
+            <img src="assets/champion_art/Blessed_Limb_of_Justice.png" alt="Blessed Limb of Justice" class="champion-image-btn" onclick="loadChampionData('Blessed Limb of Justice', 'Blessed_Limb_of_Justice.png')">
+            <img src="assets/champion_art/Iridescent_Bastion.png" alt="Iridescent Bastion" class="champion-image-btn" onclick="loadChampionData('Iridescent Bastion', 'Iridescent_Bastion.png')">
+            <img src="assets/champion_art/The_Unfurled.png" alt="The Unfurled" class="champion-image-btn" onclick="loadChampionData('The Unfurled', 'The_Unfurled.png')">
+            <img src="assets/champion_art/Placeholder_12.png" alt="Placeholder 12" class="champion-image-btn" onclick="loadChampionData('Placeholder 12', 'Placeholder_12.png')">
         </div>
     </main>
 
     <section id="champion-details" class="hidden">
         <div class="detail-header">
-            <button class="back-btn" onclick="returnToGrid()">Return to Roster</button>
-            <h2 id="detail-title">Champion Name</h2>
+            <button class="back-btn" onclick="returnToGrid()">Return to Champions</button>
+            <div class="title-group">
+                <img id="detail-header-image" src="" alt="">
+                <h2 id="detail-title">Champion Name</h2>
+            </div>
         </div>
         
         <div class="tab-menu">

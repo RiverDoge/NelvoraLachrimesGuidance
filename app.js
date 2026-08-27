@@ -10,10 +10,13 @@ function fetchCSV(url) {
     });
 }
 
-function loadChampionData(championName) {
+function loadChampionData(championName, imageName) {
     document.getElementById("champion-selection").classList.add("hidden");
     document.getElementById("champion-details").classList.remove("hidden");
+    
+    // Inject name and art into the header
     document.getElementById("detail-title").innerText = championName;
+    document.getElementById("detail-header-image").src = `assets/champion_art/${imageName}`;
     
     Promise.all([
         fetchCSV("data/Xeryos_Factions_DB.csv"),
@@ -30,7 +33,7 @@ function loadChampionData(championName) {
         populateTabs(factionData, subFactionData, objectiveData, individualData);
     }).catch(error => {
         console.error("Data Load Error:", error);
-        document.getElementById("tab-faction").innerHTML = `<p style="color:var(--xeryos-accent); font-weight:bold;">Error loading data. If you are opening this locally from your desktop, your browser is blocking CSV access. Please view via GitHub Pages or a local web server.</p>`;
+        document.getElementById("tab-faction").innerHTML = `<p style="color:var(--xeryos-crimson-bright); font-weight:bold;">Error loading data. If you are opening this locally from your desktop, your browser is blocking CSV access. Please view via GitHub Pages or a local web server.</p>`;
     });
 }
 
