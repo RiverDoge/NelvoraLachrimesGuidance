@@ -14,13 +14,19 @@ function loadChampionData(championName, imageName) {
     document.getElementById("champion-selection").classList.add("hidden");
     document.getElementById("champion-details").classList.remove("hidden");
     
-    // Inject name and art into the header
     document.getElementById("detail-title").innerText = championName;
-    document.getElementById("detail-header-image").src = `assets/champion_art/${imageName}`;
+    
+    // Set the header image, with a fallback if missing
+    const headerImg = document.getElementById("detail-header-image");
+    headerImg.src = `assets/champion_art/${imageName}`;
+    headerImg.onerror = function() {
+        this.onerror = null;
+        this.src = 'assets/champion_art/Placeholder_12.png';
+    };
     
     Promise.all([
         fetchCSV("data/Xeryos_Factions_DB.csv"),
-        fetchCSV("data/Xeryos_Sub_Factions_DB.csv"),
+        fetchCSV("data/Xeryos_Sub-Factions_DB.csv"), // Fixed hyphen to match your repo
         fetchCSV("data/Xeryos_Objectives_DB.csv"),
         fetchCSV("data/Xeryos_Individuals_DB.csv")
     ]).then(([factions, subFactions, objectives, individuals]) => {
@@ -38,7 +44,6 @@ function loadChampionData(championName, imageName) {
 }
 
 function populateTabs(faction, subFactions, objectives, individuals) {
-    // 1. Faction Dashboard
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${faction['Faction Name'] || 'Unknown Faction'}</h3>
@@ -81,7 +86,6 @@ function populateTabs(faction, subFactions, objectives, individuals) {
         </div>
     `;
 
-    // 2. Sub-Factions (Entity Cards)
     let subHtml = "";
     if (subFactions.length === 0) {
         subHtml = "<p>No sub-factions recorded.</p>";
@@ -104,7 +108,6 @@ function populateTabs(faction, subFactions, objectives, individuals) {
     }
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // 3. Objectives (Entity Cards)
     let objHtml = "";
     if (objectives.length === 0) {
         objHtml = "<p>No active objectives recorded.</p>";
@@ -130,7 +133,6 @@ function populateTabs(faction, subFactions, objectives, individuals) {
     }
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 4. Individuals (Entity Cards)
     let indHtml = "";
     if (individuals.length === 0) {
         indHtml = "<p>No notable individuals recorded.</p>";
