@@ -12,7 +12,7 @@ function fetchCSV(url) {
 
 function formatData(value) {
     if (!value || value.trim() === '' || value.trim().toLowerCase() === 'unknown' || value.trim().toLowerCase() === 'n/a' || value.trim().toLowerCase() === 'none') {
-        return `<span class="ghost-text">Classified</span>`;
+        return `<span class="ghost-text">Unknown</span>`;
     }
     return value;
 }
