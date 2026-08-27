@@ -78,7 +78,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                 <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             </div>
             
-            <div class="leader-info-card">
+            <div class="leader-info-block">
                 <div class="leader-title-wrap">
                     <span class="stat-label">Faction Leader</span>
                     <h4>${formatData(faction['Leader Name'])}</h4>
@@ -139,7 +139,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     subHtml += '</div>';
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // 3. OBJECTIVES TAB (Collapsible)
+    // 3. OBJECTIVES TAB (Description moved inside expansion)
     let objHtml = '';
     if (objectives.length === 0) {
         objHtml += "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No active objectives recorded.</p></div>";
@@ -162,10 +162,9 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
             <div class="field-note-card expandable-card filterable-card" data-faction="${safeFaction}" onclick="toggleExpand(this)">
                 <span class="top-right-badge ${statusBadge}">${formatData(obj['Status'])}</span>
                 <h3>${formatData(obj['Objective Name'])}</h3>
-                <p class="entity-desc">${formatData(obj['Description'])}</p>
-                <span class="expand-hint">Click to expand</span>
                 
                 <div class="collapsible-stats">
+                    <p class="entity-desc">${formatData(obj['Description'])}</p>
                     <div class="entity-footer">
                         <div class="stat-block"><span class="stat-label">Overseer</span> <span class="stat-value">${formatData(obj['Objective Giver'])}</span></div>
                         <div class="stat-block"><span class="stat-label">Difficulty</span> <span class="stat-value">${formatData(obj['Difficulty'])}</span></div>
@@ -180,7 +179,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     }
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 4. INDIVIDUALS TAB (Collapsible)
+    // 4. INDIVIDUALS TAB (Description moved inside expansion)
     let indHtml = '';
     if (individuals.length === 0) {
         indHtml += "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No notable individuals recorded.</p></div>";
@@ -201,10 +200,9 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
             <div class="field-note-card expandable-card filterable-card" data-faction="${safeFaction}" onclick="toggleExpand(this)">
                 <span class="top-right-badge badge-danger">CR: ${formatData(ind['Challenge Rating'])}</span>
                 <h3>${formatData(ind['Name'])}</h3>
-                <p class="entity-desc">${formatData(ind['Description'])}</p>
-                <span class="expand-hint">Click to expand</span>
                 
                 <div class="collapsible-stats">
+                    <p class="entity-desc">${formatData(ind['Description'])}</p>
                     <div class="entity-footer">
                         <div class="stat-block"><span class="stat-label">Strengths</span> <span class="stat-value">${formatData(ind['Strengths'])}</span></div>
                         <div class="stat-block"><span class="stat-label">Weaknesses</span> <span class="stat-value">${formatData(ind['Weaknesses'])}</span></div>
@@ -220,17 +218,13 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     document.getElementById("tab-individuals").innerHTML = indHtml;
 }
 
-// Function to toggle the expanded state of a card
 function toggleExpand(cardElement) {
     const statsContainer = cardElement.querySelector('.collapsible-stats');
-    const hint = cardElement.querySelector('.expand-hint');
     
     if (statsContainer.classList.contains('open')) {
         statsContainer.classList.remove('open');
-        hint.innerText = "Click to expand";
     } else {
         statsContainer.classList.add('open');
-        hint.innerText = "Click to close";
     }
 }
 

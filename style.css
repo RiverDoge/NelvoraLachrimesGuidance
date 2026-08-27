@@ -100,7 +100,6 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     border: 1px solid var(--xeryos-border);
     border-radius: 12px; 
     padding: 40px;
-    /* Clean, unified glow surrounding the entire menu */
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
     width: 100%;
 }
@@ -335,7 +334,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-bottom: 10px; /* Reduced bulk spacing */
+    margin-bottom: 10px; 
 }
 .stat-label {
     color: var(--text-muted);
@@ -351,10 +350,9 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .danger-text { color: var(--xeryos-crimson-bright); font-weight: bold; }
 .ghost-text { color: #555; font-style: italic; font-weight: normal; }
 
-/* --- Entity Cards --- */
 .entity-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 
@@ -362,7 +360,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     background: var(--xeryos-card);
     border: 1px solid var(--xeryos-crimson-dark);
     border-radius: 8px; 
-    padding: 15px 20px; /* Reduced vertical padding */
+    padding: 20px; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -394,16 +392,6 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     animation: quickFade 0.3s ease-out;
 }
 
-.expand-hint {
-    font-size: 0.8rem;
-    color: var(--xeryos-crimson-dark);
-    margin-top: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-}
-.expandable-card:hover .expand-hint { color: var(--xeryos-crimson-bright); }
-
 .top-right-badge {
     position: absolute;
     top: 15px;
@@ -421,7 +409,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .badge-highlight { background: #222; border: 1px solid var(--xeryos-crimson-bright); color: var(--xeryos-crimson-bright); }
 
 .field-note-card h3 {
-    margin: 5px 0 5px 0; /* Tighter margins */
+    margin: 5px 0 0 0; 
     color: var(--text-main);
     font-size: 1.5rem;
 }
@@ -429,7 +417,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .entity-desc {
     color: var(--text-muted);
     font-style: italic;
-    margin-bottom: 0; /* Reduced */
+    margin-bottom: 15px; 
     text-align: center;
     flex-grow: 1;
     font-size: 1.1rem;
