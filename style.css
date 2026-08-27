@@ -1,4 +1,4 @@
-/* --- Core Palette (Obsidian & Crimson) --- */
+/* --- Core Palette --- */
 :root {
     --xeryos-bg: #070707;
     --xeryos-page: #121212;
@@ -11,12 +11,6 @@
 }
 
 * { box-sizing: border-box; }
-
-/* Thematic Scrollbars */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--xeryos-bg); }
-::-webkit-scrollbar-thumb { background: var(--xeryos-border); border-radius: 5px; }
-::-webkit-scrollbar-thumb:hover { background: var(--xeryos-crimson-dark); }
 
 body.theme-xeryos {
     background-color: var(--xeryos-bg);
@@ -33,6 +27,29 @@ body.theme-xeryos {
     letter-spacing: 4px;
     font-size: 2.5rem;
     margin-bottom: 40px;
+}
+
+/* Faded Top Left Return Button */
+.fixed-return-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--text-muted);
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    opacity: 0.25;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+.fixed-return-btn:hover {
+    opacity: 1;
+    background: var(--xeryos-panel);
+    border-color: var(--xeryos-crimson-bright);
+    color: var(--xeryos-crimson-bright);
 }
 
 /* --- Champion Index Grid --- */
@@ -67,32 +84,31 @@ body.theme-xeryos {
 /* --- Grimoire Detail View --- */
 .hidden { display: none !important; }
 
+/* The Wrapper handles exact centering */
 .grimoire-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    max-width: 1300px;
-    margin: 0 auto;
-    gap: 0; /* Page and bookmarks connect */
+    position: relative;
+    max-width: 950px;
+    margin: 0 auto; /* Perfect Center */
 }
 
 /* The Main Manuscript Page */
 .grimoire-page {
-    flex-grow: 1;
     background: var(--xeryos-page);
     border: 1px solid var(--xeryos-border);
     border-radius: 6px;
-    padding: 40px;
+    padding: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    max-width: 1050px;
+    width: 100%;
 }
 
-/* The Side Bookmarks */
+/* The Side Bookmarks (Hangs off the right side) */
 .grimoire-bookmarks {
+    position: absolute;
+    left: 100%; /* Pushes it outside the right edge of the page */
+    top: 120px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 100px; /* Aligns with the data tabs */
+    gap: 5px;
 }
 
 .bookmark-link {
@@ -100,248 +116,238 @@ body.theme-xeryos {
     color: var(--text-muted);
     border: 1px solid var(--xeryos-border);
     border-left: none; /* Connects physically to the page */
-    padding: 15px 25px;
-    border-radius: 0 8px 8px 0;
+    padding: 12px 20px;
+    border-radius: 0 6px 6px 0;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.2s ease;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
     text-align: left;
+    white-space: nowrap;
 }
 
 .bookmark-link:hover {
     background: #1a1a1a;
     color: var(--text-main);
-    padding-left: 30px; /* Slightly extends on hover */
+    padding-left: 25px; /* Extends on hover */
 }
 
 .bookmark-link.active {
     background: var(--xeryos-crimson-dark);
     color: #fff;
     border-color: var(--xeryos-crimson-bright);
-    padding-left: 35px; /* Extends fully when active */
+    padding-left: 30px; /* Extends fully when active */
 }
 
 /* Mobile Fallback for Bookmarks */
-@media (max-width: 1000px) {
-    .grimoire-wrapper { flex-direction: column; align-items: center; gap: 20px; }
-    .grimoire-bookmarks { flex-direction: row; flex-wrap: wrap; margin-top: 0; justify-content: center; }
-    .bookmark-link { border-left: 1px solid var(--xeryos-border); border-radius: 4px; padding: 10px 15px; }
+@media (max-width: 1200px) {
+    .grimoire-wrapper { max-width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .grimoire-bookmarks { position: static; flex-direction: row; flex-wrap: wrap; margin-top: 20px; justify-content: center; }
+    .bookmark-link { border: 1px solid var(--xeryos-border); border-radius: 4px; padding: 10px 15px; }
     .bookmark-link.active { padding-left: 15px; }
-    .grimoire-page { padding: 20px; }
 }
 
-/* Header & Navigation inside Page */
-.grimoire-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--xeryos-border);
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-}
-
-@media (max-width: 768px) {
-    .grimoire-nav { flex-direction: column; gap: 20px; }
-}
-
-.back-btn {
-    background: transparent;
-    color: var(--text-muted);
-    border: 1px solid var(--xeryos-border);
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: all 0.2s ease;
-    width: 100px;
-}
-.back-btn:hover {
-    color: var(--xeryos-crimson-bright);
-    border-color: var(--xeryos-crimson-bright);
-}
-
-.grimoire-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-.header-art-container {
-    width: 90px;
-    height: 90px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-#detail-header-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px var(--xeryos-crimson-bright));
-    transition: transform 0.2s ease;
-}
-#detail-header-image:hover { transform: scale(1.1); }
-
-.grimoire-title h2 {
-    margin: 0;
-    color: var(--text-main);
-    font-size: 2.2rem;
-    letter-spacing: 2px;
-}
-
-/* --- Base Info Panels --- */
-.faction-hero { margin-bottom: 30px; }
-.faction-hero h3 { color: var(--xeryos-crimson-bright); font-size: 2rem; margin: 0 0 10px 0; }
-.faction-hero p { color: var(--text-muted); font-size: 1.15rem; margin: 0; }
-
-.base-info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr; 
-    gap: 25px;
-    margin-bottom: 40px;
-}
-
-@media (max-width: 900px) {
-    .base-info-grid { grid-template-columns: 1fr; }
-}
-
-.base-card {
-    background: var(--xeryos-card);
-    border: 1px solid var(--xeryos-border);
-    border-radius: 4px;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.base-card h4 {
-    margin: 0 0 25px 0;
-    font-size: 1.3rem;
-    color: var(--xeryos-crimson-bright);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 1px solid var(--xeryos-border);
-    padding-bottom: 10px;
-    width: 100%;
-}
-
-.hq-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-}
-
-.leader-layout {
+/* Inline Title (Side-by-Side Art and Name) */
+.grimoire-title-inline {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    width: 100%;
+    gap: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--xeryos-border);
+    margin-bottom: 25px;
 }
 
-@media (max-width: 600px) {
-    .leader-layout { flex-direction: column; gap: 20px; }
-}
-
-.leader-portrait {
-    width: 180px; 
-    height: 180px;
+#detail-header-image {
+    width: 70px; /* Smaller to save vertical space */
+    height: 70px;
     object-fit: contain;
     cursor: pointer;
-    filter: drop-shadow(0 0 12px var(--xeryos-crimson-dark));
+    filter: drop-shadow(0 0 8px var(--xeryos-crimson-bright));
+    transition: transform 0.2s ease;
+}
+#detail-header-image:hover { transform: scale(1.1); }
+
+.grimoire-title-inline h2 {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+/* Tab Management */
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: quickFade 0.3s ease-out; }
+
+@keyframes quickFade {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Base Info (Moved Inside Faction Tab) --- */
+.faction-hero { margin-bottom: 25px; }
+.faction-hero h3 { color: var(--xeryos-crimson-bright); font-size: 1.8rem; margin: 0 0 5px 0; }
+.faction-hero p { color: var(--text-muted); font-size: 1.1rem; margin: 0; font-style: italic; }
+
+.leader-horizontal-card {
+    background: var(--xeryos-card);
+    border: 1px solid var(--xeryos-border);
+    border-top: 3px solid var(--xeryos-crimson-dark);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row; /* Horizontal alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 650px) {
+    .leader-horizontal-card { flex-direction: column; }
+}
+
+.leader-portrait-large {
+    width: 140px; 
+    height: 140px;
+    object-fit: contain;
+    cursor: pointer;
+    filter: drop-shadow(0 0 10px var(--xeryos-crimson-dark));
     transition: transform 0.2s ease;
     flex-shrink: 0;
 }
-.leader-portrait:hover { transform: scale(1.05); }
+.leader-portrait-large:hover { transform: scale(1.05); }
 
-.leader-stats {
+.leader-info-block {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 15px;
 }
 
-/* Stat Blocks */
+.leader-title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.leader-title-wrap h4 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: var(--text-main);
+}
+
+.leader-stats-row {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Grid for Base Info */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .info-grid { grid-template-columns: 1fr; }
+}
+
+.info-panel {
+    background: var(--xeryos-card);
+    border: 1px solid var(--xeryos-border);
+    border-top: 3px solid var(--xeryos-crimson-dark);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-panel h4 {
+    margin: 0 0 15px 0;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--xeryos-border);
+    padding-bottom: 8px;
+    width: 100%;
+}
+
+/* Reusable Stat Blocks */
 .stat-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 2px;
+    margin-bottom: 12px;
 }
 .stat-label {
     color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 .stat-value {
     color: var(--text-main);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 .danger-text { color: var(--xeryos-crimson-bright); font-weight: bold; }
 .ghost-text { color: #444; font-style: italic; font-weight: normal; }
 
 /* --- Pinned Field Notes (Entity Cards) --- */
-.tab-content { display: none; }
-.tab-content.active { display: block; animation: quickFade 0.3s ease-out; }
-
 .entity-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 25px;
+    gap: 20px;
 }
 
 .field-note-card {
     background: var(--xeryos-card);
     border: 1px solid var(--xeryos-crimson-dark);
-    border-radius: 2px; /* Sharper, paper-like corners */
-    padding: 30px 20px;
+    border-radius: 4px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 }
 
-/* The "Pin" */
 .field-note-card::before {
     content: '';
     position: absolute;
-    top: 10px;
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: var(--xeryos-crimson-bright);
-    box-shadow: 0 0 5px #000;
 }
 
 .field-note-card h3 {
-    margin: 10px 0 15px 0;
+    margin: 10px 0 10px 0;
     color: var(--text-main);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .badge {
-    padding: 4px 12px;
+    padding: 4px 10px;
     border-radius: 4px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
-
 .badge-danger { background: var(--xeryos-crimson-dark); color: #fff; }
 .badge-neutral { background: #333; color: var(--text-main); }
 .badge-highlight { border: 1px solid var(--xeryos-crimson-bright); color: var(--xeryos-crimson-bright); }
@@ -349,7 +355,7 @@ body.theme-xeryos {
 .entity-desc {
     color: var(--text-muted);
     font-style: italic;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     text-align: center;
     flex-grow: 1;
 }
@@ -358,9 +364,9 @@ body.theme-xeryos {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
     border-top: 1px dashed var(--xeryos-border);
-    padding-top: 20px;
+    padding-top: 15px;
     width: 100%;
 }
 
@@ -375,4 +381,8 @@ body.theme-xeryos {
     max-width: 90%; max-height: 90%; border-radius: 8px;
     filter: drop-shadow(0 0 30px rgba(220, 20, 60, 0.4));
     animation: zoomIn 0.2s ease-out;
+}
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }

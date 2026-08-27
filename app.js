@@ -18,8 +18,11 @@ function formatData(value) {
 }
 
 function loadChampionData(championName, imageName) {
+    // Hide Title and Main Grid, Show Details and Return Button
+    document.getElementById("main-header").classList.add("hidden");
     document.getElementById("champion-selection").classList.add("hidden");
     document.getElementById("champion-details").classList.remove("hidden");
+    document.getElementById("return-btn").classList.remove("hidden");
     
     document.getElementById("detail-title").innerText = championName;
     
@@ -45,7 +48,7 @@ function loadChampionData(championName, imageName) {
         populateTabs(factionData, subFactionData, objectiveData, individualData, championName);
     }).catch(error => {
         console.error("Data Load Error:", error);
-        document.getElementById("base-info-container").innerHTML = `<p style="color:var(--xeryos-crimson-bright); font-weight:bold;">Error loading data.</p>`;
+        document.getElementById("tab-faction").innerHTML = `<p style="color:var(--xeryos-crimson-bright); font-weight:bold;">Error loading data.</p>`;
     });
 }
 
@@ -53,98 +56,51 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     const formattedName = championName.replace(/\s+/g, '_');
     const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
 
-    // 1. BASE INFO (HQ and Leader)
-    document.getElementById("base-info-container").innerHTML = `
+    // 1. FACTION INFO TAB (Now includes Leader and HQ to save vertical space)
+    document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${formatData(faction['Faction Name'])}</h3>
-            <p class="faction-desc">${formatData(faction['Faction Description'])}</p>
+            <p class="entity-desc">${formatData(faction['Faction Description'])}</p>
+        </div>
+        
+        <div class="base-card leader-horizontal-card">
+            <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            
+            <div class="leader-info-block">
+                <div class="leader-title-wrap">
+                    <span class="stat-label">Faction Leader</span>
+                    <h4>${formatData(faction['Leader Name'])} <span class="danger-text" style="font-size:0.9rem; margin-left:5px;">(CR: ${formatData(faction['Leader Danger'])})</span></h4>
+                </div>
+                <div class="leader-stats-row">
+                    <div class="stat-block"><span class="stat-label">Combat Style</span><span class="stat-value">${formatData(faction['Combat Style'])}</span></div>
+                    <div class="stat-block"><span class="stat-label">Force Size</span><span class="stat-value">${formatData(faction['Size of Forces'])}</span></div>
+                    <div class="stat-block"><span class="stat-label">Overall Danger</span><span class="stat-value danger-text">${formatData(faction['Overall Danger Level'])}</span></div>
+                </div>
+            </div>
         </div>
 
-        <div class="base-info-grid">
-            <!-- Left Side: HQ -->
-            <div class="base-card">
+        <div class="info-grid">
+            <div class="info-panel">
                 <h4>Headquarters Information</h4>
-                <div class="hq-stats">
-                    <div class="stat-block">
-                        <span class="stat-label">Location</span>
-                        <span class="stat-value">${formatData(faction['HQ Location'])}</span>
-                    </div>
-                    <div class="stat-block">
-                        <span class="stat-label">Danger Level</span>
-                        <span class="stat-value danger-text">${formatData(faction['HQ Danger Level'])}</span>
-                    </div>
-                    <div class="stat-block">
-                        <span class="stat-label">Features</span>
-                        <span class="stat-value">${formatData(faction['HQ Features'])}</span>
-                    </div>
-                    <div class="stat-block">
-                        <span class="stat-label">Accessibility</span>
-                        <span class="stat-value">${formatData(faction['HQ Accessibility'])}</span>
-                    </div>
-                    <div class="stat-block">
-                        <span class="stat-label">Details</span>
-                        <span class="stat-value" style="font-size: 1rem;">${formatData(faction['HQ Description'])}</span>
-                    </div>
-                </div>
+                <div class="stat-block"><span class="stat-label">Location</span> <span class="stat-value">${formatData(faction['HQ Location'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Danger Level</span> <span class="stat-value danger-text">${formatData(faction['HQ Danger Level'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Features</span> <span class="stat-value">${formatData(faction['HQ Features'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Accessibility</span> <span class="stat-value">${formatData(faction['HQ Accessibility'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Details</span> <span class="stat-value" style="font-size: 1rem; font-weight: normal;">${formatData(faction['HQ Description'])}</span></div>
             </div>
-
-            <!-- Right Side: Leader -->
-            <div class="base-card">
-                <h4>Faction Leader</h4>
-                <div class="leader-layout">
-                    <img src="${leaderImg}" alt="Leader Art" class="leader-portrait" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
-                    
-                    <div class="leader-stats">
-                        <div class="stat-block">
-                            <span class="stat-label">Name</span>
-                            <span class="stat-value" style="font-size: 1.5rem; color: var(--xeryos-crimson-bright);">${formatData(faction['Leader Name'])}</span>
-                        </div>
-                        <div class="stat-block">
-                            <span class="stat-label">Challenge Rating</span>
-                            <span class="stat-value danger-text">${formatData(faction['Leader Danger'])}</span>
-                        </div>
-                        <div class="stat-block">
-                            <span class="stat-label">Combat Style</span>
-                            <span class="stat-value">${formatData(faction['Combat Style'])}</span>
-                        </div>
-                        <div class="stat-block">
-                            <span class="stat-label">Force Size</span>
-                            <span class="stat-value">${formatData(faction['Size of Forces'])}</span>
-                        </div>
-                        <div class="stat-block">
-                            <span class="stat-label">Overall Danger</span>
-                            <span class="stat-value highlight">${formatData(faction['Overall Danger Level'])}</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="info-panel">
+                <h4>Alignments & Capabilities</h4>
+                <div class="stat-block"><span class="stat-label">Unique Abilities</span> <span class="stat-value">${formatData(faction['Unique Abilities'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Strengths</span> <span class="stat-value">${formatData(faction['Strengths'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Weaknesses</span> <span class="stat-value">${formatData(faction['Weaknesses'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Interests</span> <span class="stat-value">${formatData(faction['Interests'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Alliances</span> <span class="stat-value">${formatData(faction['Alliances'])}</span></div>
+                <div class="stat-block"><span class="stat-label">Enemies</span> <span class="stat-value">${formatData(faction['Enemies'])}</span></div>
             </div>
         </div>
     `;
 
-    // 2. DOCTRINE TAB
-    document.getElementById("tab-doctrine").innerHTML = `
-        <div class="entity-grid">
-            <div class="field-note-card">
-                <h3>Capabilities</h3>
-                <div class="entity-footer" style="border:none; padding-top:0;">
-                    <div class="stat-block"><span class="stat-label">Unique Abilities</span> <span class="stat-value">${formatData(faction['Unique Abilities'])}</span></div>
-                    <div class="stat-block"><span class="stat-label">Strengths</span> <span class="stat-value">${formatData(faction['Strengths'])}</span></div>
-                    <div class="stat-block"><span class="stat-label">Weaknesses</span> <span class="stat-value">${formatData(faction['Weaknesses'])}</span></div>
-                </div>
-            </div>
-            <div class="field-note-card">
-                <h3>Alignments</h3>
-                <div class="entity-footer" style="border:none; padding-top:0;">
-                    <div class="stat-block"><span class="stat-label">Likes / Dislikes</span> <span class="stat-value">${formatData(faction['Likes'])} / ${formatData(faction['Dislikes'])}</span></div>
-                    <div class="stat-block"><span class="stat-label">Interests</span> <span class="stat-value">${formatData(faction['Interests'])}</span></div>
-                    <div class="stat-block"><span class="stat-label">Alliances</span> <span class="stat-value">${formatData(faction['Alliances'])}</span></div>
-                    <div class="stat-block"><span class="stat-label">Enemies</span> <span class="stat-value">${formatData(faction['Enemies'])}</span></div>
-                </div>
-            </div>
-        </div>
-    `;
-
-    // 3. SUB-FACTIONS TAB
+    // 2. SUB-FACTIONS TAB
     let subHtml = '<div class="entity-grid">';
     if (subFactions.length === 0) {
         subHtml += "<p class='ghost-text' style='grid-column: 1 / -1;'>No sub-factions recorded.</p>";
@@ -167,7 +123,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     subHtml += '</div>';
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // 4. OBJECTIVES TAB
+    // 3. OBJECTIVES TAB
     let objHtml = '<div class="entity-grid">';
     if (objectives.length === 0) {
         objHtml += "<p class='ghost-text' style='grid-column: 1 / -1;'>No active objectives recorded.</p>";
@@ -192,7 +148,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     objHtml += '</div>';
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 5. INDIVIDUALS TAB
+    // 4. INDIVIDUALS TAB
     let indHtml = '<div class="entity-grid">';
     if (individuals.length === 0) {
         indHtml += "<p class='ghost-text' style='grid-column: 1 / -1;'>No notable individuals recorded.</p>";
@@ -234,7 +190,9 @@ function openTab(evt, tabId) {
 
 function returnToGrid() {
     document.getElementById("champion-details").classList.add("hidden");
+    document.getElementById("return-btn").classList.add("hidden");
     document.getElementById("champion-selection").classList.remove("hidden");
+    document.getElementById("main-header").classList.remove("hidden");
 }
 
 function openLightbox(imgSrc) {

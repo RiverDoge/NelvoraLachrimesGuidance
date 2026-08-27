@@ -8,6 +8,9 @@
 </head>
 <body class="theme-xeryos">
 
+    <!-- Faded Return Button (Fixed Top Left) -->
+    <button id="return-btn" class="fixed-return-btn hidden" onclick="returnToGrid()">&#8592; Return</button>
+
     <header id="main-header">
         <h1>Forces of Xeryos</h1>
     </header>
@@ -34,32 +37,25 @@
             
             <!-- The Main Manuscript Page -->
             <div class="grimoire-page">
-                <div class="grimoire-nav">
-                    <button class="back-btn" onclick="returnToGrid()">&#8592; Return</button>
-                    <div class="grimoire-title">
-                        <div class="header-art-container">
-                            <img id="detail-header-image" src="" alt="Champion Seal" onclick="openLightbox(this.src)">
-                        </div>
-                        <h2 id="detail-title">Champion Name</h2>
-                    </div>
-                    <div style="width: 100px;"></div> <!-- Spacer for flex centering -->
+                
+                <!-- Inline Title & Art (Always visible) -->
+                <div class="grimoire-title-inline">
+                    <img id="detail-header-image" src="" alt="Champion Seal" onclick="openLightbox(this.src)">
+                    <h2 id="detail-title">Champion Name</h2>
                 </div>
-
-                <!-- Base Information -->
-                <div id="base-info-container"></div>
 
                 <!-- Manuscript Data -->
                 <div class="manuscript-content">
-                    <div id="tab-doctrine" class="tab-content active"></div>
+                    <div id="tab-faction" class="tab-content active"></div>
                     <div id="tab-subfactions" class="tab-content"></div>
                     <div id="tab-objectives" class="tab-content"></div>
                     <div id="tab-individuals" class="tab-content"></div>
                 </div>
             </div>
 
-            <!-- The Leather Bookmarks -->
+            <!-- The Leather Bookmarks (Absolute Positioned so they don't break centering) -->
             <div class="grimoire-bookmarks">
-                <button class="bookmark-link active" onclick="openTab(event, 'tab-doctrine')">Doctrine</button>
+                <button class="bookmark-link active" onclick="openTab(event, 'tab-faction')">Faction Info</button>
                 <button class="bookmark-link" onclick="openTab(event, 'tab-subfactions')">Sub-Factions</button>
                 <button class="bookmark-link" onclick="openTab(event, 'tab-objectives')">Objectives</button>
                 <button class="bookmark-link" onclick="openTab(event, 'tab-individuals')">Individuals</button>
