@@ -58,7 +58,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     const formattedName = championName.replace(/\s+/g, '_');
     const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
 
-    // 1. FACTION INFO TAB (Leader CR moved to top-right badge)
+    // 1. FACTION INFO TAB
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${formatData(faction['Faction Name'])}</h3>
@@ -66,8 +66,12 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="base-card leader-horizontal-card">
+            <!-- Overlapping Portrait Frame -->
+            <div class="leader-portrait-frame">
+                <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            </div>
+            
             <span class="top-right-badge badge-danger">CR: ${formatData(faction['Leader Danger'])}</span>
-            <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             
             <div class="leader-info-block">
                 <div class="leader-title-wrap">
@@ -126,7 +130,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     subHtml += '</div>';
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // 3. OBJECTIVES TAB (Added Filter)
+    // 3. OBJECTIVES TAB
     const objFactions = [...new Set(objectives.map(obj => obj['Faction Name']).filter(f => f && f.trim() !== ''))];
     let objHtml = '';
     
@@ -165,7 +169,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     }
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 4. INDIVIDUALS TAB (Added Filter)
+    // 4. INDIVIDUALS TAB
     const indFactions = [...new Set(individuals.map(ind => ind['Faction Name']).filter(f => f && f.trim() !== ''))];
     let indHtml = '';
     
@@ -203,15 +207,14 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     document.getElementById("tab-individuals").innerHTML = indHtml;
 }
 
-// Function to handle the dropdown filtering
 function filterCards(tabId, selectedFaction) {
     const tab = document.getElementById(tabId);
     const cards = tab.getElementsByClassName('filterable-card');
     for (let i = 0; i < cards.length; i++) {
         if (selectedFaction === 'All' || cards[i].getAttribute('data-faction') === selectedFaction) {
-            cards[i].style.display = 'flex'; // Restores normal flex layout
+            cards[i].style.display = 'flex';
         } else {
-            cards[i].style.display = 'none'; // Hides unmatched cards
+            cards[i].style.display = 'none';
         }
     }
 }
