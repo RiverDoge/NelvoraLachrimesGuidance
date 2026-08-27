@@ -6,17 +6,21 @@
     --xeryos-border: #2d2d2d;
     --xeryos-crimson-dark: #5a0000;
     --xeryos-crimson-bright: #cc1133;
-    /* Updated to softer "Bone Ash" and warm grey for less eye strain */
     --text-main: #e2dcd0;
     --text-muted: #8c857d;
 }
 
 * { box-sizing: border-box; }
 
+/* Thematic Scrollbars */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--xeryos-bg); }
+::-webkit-scrollbar-thumb { background: var(--xeryos-border); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--xeryos-crimson-dark); }
+
 body.theme-xeryos {
     background-color: var(--xeryos-bg);
     color: var(--text-main);
-    /* Base UI font remains modern sans-serif for readability */
     font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 30px 15px;
@@ -97,14 +101,12 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     margin: 0 auto; 
 }
 
-/* The Main Manuscript Page (Textured & Stacked) */
+/* The Main Manuscript Page */
 .grimoire-page {
-    /* Subtle radial gradient mimicking lighting on leather/parchment */
     background: radial-gradient(circle at center, #1a1a1a 0%, var(--xeryos-page) 80%);
     border: 1px solid var(--xeryos-border);
     border-radius: 12px; 
     padding: 30px;
-    /* Layered shadows to simulate a thick stack of pages */
     box-shadow: 
         3px 3px 0 #181818, 
         6px 6px 0 #0d0d0d, 
@@ -113,7 +115,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     width: 100%;
 }
 
-/* The Side Bookmarks (With Leather Stitching) */
+/* The Side Bookmarks */
 .grimoire-bookmarks {
     position: absolute;
     left: 100%; 
@@ -138,7 +140,6 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     transition: all 0.2s ease;
     text-align: left;
     white-space: nowrap;
-    /* Simulated Leather Stitching */
     outline: 1px dashed rgba(255,255,255,0.1);
     outline-offset: -4px;
 }
@@ -164,7 +165,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     .bookmark-link.active { padding-left: 15px; }
 }
 
-/* Inline Title (Art flanking Name) */
+/* Inline Title */
 .grimoire-title-inline {
     display: flex;
     flex-direction: row;
@@ -185,15 +186,13 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     transition: transform 0.2s ease;
 }
 .header-art-img:hover { transform: scale(1.1); }
-
-/* Flips the right image so they mirror each other */
 .header-art-img.flipped { transform: scaleX(-1); }
 .header-art-img.flipped:hover { transform: scaleX(-1) scale(1.1); }
 
 .grimoire-title-inline h2 {
     margin: 0;
     color: var(--text-main);
-    font-size: 2.5rem; /* Slightly larger */
+    font-size: 2.5rem; 
     letter-spacing: 2px;
 }
 
@@ -204,6 +203,41 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 @keyframes quickFade {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- In-Tab Filter Bar --- */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.filter-container label {
+    color: var(--text-muted);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.filter-container select {
+    background-color: #0d0d0d;
+    color: var(--text-main);
+    border: 1px solid var(--xeryos-border);
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.filter-container select:hover,
+.filter-container select:focus {
+    border-color: var(--xeryos-crimson-bright);
 }
 
 /* --- Base Info --- */
@@ -223,6 +257,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     justify-content: center;
     gap: 30px;
     margin-bottom: 20px;
+    position: relative; /* Added to anchor the top-right badge */
 }
 
 @media (max-width: 650px) {
@@ -320,7 +355,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .danger-text { color: var(--xeryos-crimson-bright); font-weight: bold; }
 .ghost-text { color: #555; font-style: italic; font-weight: normal; }
 
-/* --- Pinned Field Notes (Scattered Entity Cards) --- */
+/* --- Pinned Field Notes (Entity Cards) --- */
 .entity-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -336,18 +371,25 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     flex-direction: column;
     align-items: center;
     position: relative; 
-    transition: transform 0.2s ease, z-index 0s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Organic Scattering Effect */
-.field-note-card:nth-child(even) { transform: rotate(0.5deg); }
-.field-note-card:nth-child(odd) { transform: rotate(-0.5deg); }
-
-/* Straighten and elevate on hover */
+/* Simple lift on hover (Rotations Removed) */
 .field-note-card:hover {
-    transform: scale(1.02) rotate(0deg);
-    z-index: 10;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+}
+
+.field-note-card::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--xeryos-crimson-bright);
 }
 
 /* The Top Right Badge */

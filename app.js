@@ -18,7 +18,6 @@ function formatData(value) {
 }
 
 function loadChampionData(championName, imageName) {
-    // Hide Title and Main Grid, Show Details and Return Button
     document.getElementById("main-header").classList.add("hidden");
     document.getElementById("champion-selection").classList.add("hidden");
     document.getElementById("champion-details").classList.remove("hidden");
@@ -26,7 +25,6 @@ function loadChampionData(championName, imageName) {
     
     document.getElementById("detail-title").innerText = championName;
     
-    // Set the flanking header images
     const imgLeft = document.getElementById("detail-header-image-left");
     const imgRight = document.getElementById("detail-header-image-right");
     const imgPath = `assets/champion_art/${imageName}`;
@@ -60,7 +58,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     const formattedName = championName.replace(/\s+/g, '_');
     const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
 
-    // 1. FACTION INFO TAB
+    // 1. FACTION INFO TAB (Leader CR moved to top-right badge)
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${formatData(faction['Faction Name'])}</h3>
@@ -68,12 +66,13 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="base-card leader-horizontal-card">
+            <span class="top-right-badge badge-danger">CR: ${formatData(faction['Leader Danger'])}</span>
             <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             
             <div class="leader-info-block">
                 <div class="leader-title-wrap">
                     <span class="stat-label">Faction Leader</span>
-                    <h4>${formatData(faction['Leader Name'])} <span class="danger-text" style="font-size:0.9rem; margin-left:5px;">(CR: ${formatData(faction['Leader Danger'])})</span></h4>
+                    <h4>${formatData(faction['Leader Name'])}</h4>
                 </div>
                 <div class="leader-stats-row">
                     <div class="stat-block"><span class="stat-label">Combat Style</span><span class="stat-value">${formatData(faction['Combat Style'])}</span></div>
@@ -127,15 +126,29 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     subHtml += '</div>';
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // 3. OBJECTIVES TAB
-    let objHtml = '<div class="entity-grid">';
+    // 3. OBJECTIVES TAB (Added Filter)
+    const objFactions = [...new Set(objectives.map(obj => obj['Faction Name']).filter(f => f && f.trim() !== ''))];
+    let objHtml = '';
+    
     if (objectives.length === 0) {
-        objHtml += "<p class='ghost-text' style='grid-column: 1 / -1;'>No active objectives recorded.</p>";
+        objHtml += "<p class='ghost-text'>No active objectives recorded.</p>";
     } else {
+        objHtml += `
+            <div class="filter-container">
+                <label for="obj-filter">Filter by Faction:</label>
+                <select id="obj-filter" onchange="filterCards('tab-objectives', this.value)">
+                    <option value="All">All Factions</option>
+                    ${objFactions.map(f => `<option value="${f}">${f}</option>`).join('')}
+                </select>
+            </div>
+            <div class="entity-grid">
+        `;
         objectives.forEach(obj => {
             let statusBadge = obj['Status'] === 'Ongoing' ? 'badge-highlight' : 'badge-neutral';
+            let safeFaction = obj['Faction Name'] || 'Unknown';
+            
             objHtml += `
-            <div class="field-note-card">
+            <div class="field-note-card filterable-card" data-faction="${safeFaction}">
                 <span class="top-right-badge ${statusBadge}">${formatData(obj['Status'])}</span>
                 <h3>${formatData(obj['Objective Name'])}</h3>
                 <p class="entity-desc">${formatData(obj['Description'])}</p>
@@ -148,18 +161,31 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                 </div>
             </div>`;
         });
+        objHtml += '</div>';
     }
-    objHtml += '</div>';
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 4. INDIVIDUALS TAB
-    let indHtml = '<div class="entity-grid">';
+    // 4. INDIVIDUALS TAB (Added Filter)
+    const indFactions = [...new Set(individuals.map(ind => ind['Faction Name']).filter(f => f && f.trim() !== ''))];
+    let indHtml = '';
+    
     if (individuals.length === 0) {
-        indHtml += "<p class='ghost-text' style='grid-column: 1 / -1;'>No notable individuals recorded.</p>";
+        indHtml += "<p class='ghost-text'>No notable individuals recorded.</p>";
     } else {
+        indHtml += `
+            <div class="filter-container">
+                <label for="ind-filter">Filter by Faction:</label>
+                <select id="ind-filter" onchange="filterCards('tab-individuals', this.value)">
+                    <option value="All">All Factions</option>
+                    ${indFactions.map(f => `<option value="${f}">${f}</option>`).join('')}
+                </select>
+            </div>
+            <div class="entity-grid">
+        `;
         individuals.forEach(ind => {
+            let safeFaction = ind['Faction Name'] || 'Unknown';
             indHtml += `
-            <div class="field-note-card">
+            <div class="field-note-card filterable-card" data-faction="${safeFaction}">
                 <span class="top-right-badge badge-danger">CR: ${formatData(ind['Challenge Rating'])}</span>
                 <h3>${formatData(ind['Name'])}</h3>
                 <p class="entity-desc">${formatData(ind['Description'])}</p>
@@ -172,9 +198,22 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                 </div>
             </div>`;
         });
+        indHtml += '</div>';
     }
-    indHtml += '</div>';
     document.getElementById("tab-individuals").innerHTML = indHtml;
+}
+
+// Function to handle the dropdown filtering
+function filterCards(tabId, selectedFaction) {
+    const tab = document.getElementById(tabId);
+    const cards = tab.getElementsByClassName('filterable-card');
+    for (let i = 0; i < cards.length; i++) {
+        if (selectedFaction === 'All' || cards[i].getAttribute('data-faction') === selectedFaction) {
+            cards[i].style.display = 'flex'; // Restores normal flex layout
+        } else {
+            cards[i].style.display = 'none'; // Hides unmatched cards
+        }
+    }
 }
 
 function openTab(evt, tabId) {
