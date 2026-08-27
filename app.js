@@ -74,7 +74,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="leader-combo-box">
-            <!-- 1. Left Portrait Column -->
+            <!-- 1. Left Portrait Column (Transparent Frame) -->
             <div class="leader-portrait-frame">
                 <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             </div>
