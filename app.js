@@ -59,10 +59,11 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
 
     // Aggregate all unique faction names (Main and Sub) for the dropdown filters
-    const allFactions = [faction['Faction Name']];
-    subFactions.forEach(sub => allFactions.push(sub['Faction Name']));
-    objectives.forEach(obj => allFactions.push(obj['Faction Name']));
-    individuals.forEach(ind => allFactions.push(ind['Faction Name']));
+    const allFactions = [];
+    if (faction['Faction Name']) allFactions.push(faction['Faction Name']);
+    subFactions.forEach(sub => { if (sub['Faction Name']) allFactions.push(sub['Faction Name']); });
+    objectives.forEach(obj => { if (obj['Faction Name']) allFactions.push(obj['Faction Name']); });
+    individuals.forEach(ind => { if (ind['Faction Name']) allFactions.push(ind['Faction Name']); });
     
     const uniqueFactions = [...new Set(allFactions.filter(f => f && f.trim() !== '' && f.toLowerCase() !== 'unknown' && f.toLowerCase() !== 'n/a'))];
 
@@ -73,11 +74,14 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
             <p class="entity-desc">${formatData(faction['Faction Description'])}</p>
         </div>
         
-        <div class="base-card leader-horizontal-card">
-            <span class="top-right-badge badge-danger">CR: ${formatData(faction['Leader Danger'])}</span>
-            <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+        <div class="leader-combo-box">
+            <div class="leader-portrait-frame">
+                <img src="${leaderImg}" alt="Leader Art" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            </div>
             
-            <div class="leader-info-block">
+            <div class="leader-info-card">
+                <span class="top-right-badge badge-danger">CR: ${formatData(faction['Leader Danger'])}</span>
+                
                 <div class="leader-title-wrap">
                     <span class="stat-label">Faction Leader</span>
                     <h4>${formatData(faction['Leader Name'])}</h4>
