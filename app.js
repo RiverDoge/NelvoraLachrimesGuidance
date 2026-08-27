@@ -74,13 +74,9 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="leader-combo-box">
-            <!-- 1. Left Portrait Column (Transparent Frame) -->
-            <div class="leader-portrait-frame">
-                <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
-            </div>
+            <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             
-            <!-- 2. Middle Info Column -->
-            <div class="leader-info-card">
+            <div class="leader-info-block">
                 <div class="leader-title-wrap">
                     <span class="stat-label">Faction Leader</span>
                     <h4>${formatData(faction['Leader Name'])}</h4>
@@ -92,10 +88,6 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                 </div>
             </div>
 
-            <!-- 3. Right Spacer Column (Forces Perfect Centering) -->
-            <div class="leader-spacer"></div>
-
-            <!-- Absolute Top Right Badge -->
             <span class="top-right-badge badge-danger">CR: ${formatData(faction['Leader Danger'])}</span>
         </div>
 

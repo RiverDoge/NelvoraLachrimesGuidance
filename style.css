@@ -242,64 +242,53 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .faction-hero h3 { color: var(--xeryos-crimson-bright); font-size: 2.2rem; margin: 0 0 5px 0; }
 .faction-hero p { color: var(--text-muted); font-size: 1.25rem; margin: 0; font-style: italic; }
 
-/* The Fused Leader Combo Box */
+/* The Unified Leader Box (Absolute Portrait) */
 .leader-combo-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     background: var(--xeryos-card);
     border: 1px solid var(--xeryos-border);
     border-top: 3px solid var(--xeryos-crimson-dark);
     border-radius: 12px;
-    margin-bottom: 30px;
-    position: relative; /* Anchors the top right badge */
-    padding: 20px;
-}
-
-/* 1. Left Column (Transparent Frame overhanging left edge) */
-.leader-portrait-frame {
-    width: 170px;
-    height: 170px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    margin-left: -45px; /* Pulls the image outside the left edge */
-    flex-shrink: 0;
-}
-
-.leader-portrait-large {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    cursor: pointer;
-    filter: drop-shadow(-5px 5px 10px rgba(0,0,0,0.8)) drop-shadow(0 0 15px var(--xeryos-crimson-dark));
-    transition: transform 0.2s ease;
-}
-.leader-portrait-large:hover { transform: scale(1.05); }
-
-/* 2. Middle Column */
-.leader-info-card {
-    flex-grow: 1;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative; 
-    z-index: 1;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative; /* Crucial for internal absolute positioning */
+    min-height: 200px;
 }
 
-/* 3. Right Spacer Column (Forces Perfect Centering) */
-.leader-spacer {
-    width: 125px; /* Balances the 170px width minus the 45px negative margin */
-    flex-shrink: 0;
+.leader-portrait-large {
+    position: absolute;
+    left: 30px; /* Sits cleanly inside the left edge of the box */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 140px; 
+    height: 140px;
+    object-fit: contain;
+    cursor: pointer;
+    filter: drop-shadow(0 0 10px var(--xeryos-crimson-dark));
+    transition: transform 0.2s ease;
+    z-index: 2;
 }
 
-/* Mobile fallback to stack the leader card vertically */
+.leader-portrait-large:hover { 
+    transform: translateY(-50%) scale(1.05); 
+}
+
+/* Mobile fallback for absolute portrait */
 @media (max-width: 650px) {
-    .leader-combo-box { flex-direction: column; padding: 100px 20px 20px 20px; margin-top: 60px; }
-    .leader-portrait-frame { margin: 0; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); }
-    .leader-spacer { display: none; }
+    .leader-combo-box { padding-top: 180px; }
+    .leader-portrait-large { left: 50%; top: 20px; transform: translateX(-50%); }
+    .leader-portrait-large:hover { transform: translateX(-50%) scale(1.05); }
+}
+
+.leader-info-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 1;
 }
 
 .leader-title-wrap {
@@ -307,7 +296,6 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    margin-bottom: 15px;
 }
 
 .leader-title-wrap h4 {
