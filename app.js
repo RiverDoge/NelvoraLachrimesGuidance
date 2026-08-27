@@ -26,12 +26,16 @@ function loadChampionData(championName, imageName) {
     
     document.getElementById("detail-title").innerText = championName;
     
-    const headerImg = document.getElementById("detail-header-image");
-    headerImg.src = `assets/champion_art/${imageName}`;
-    headerImg.onerror = function() {
-        this.onerror = null;
-        this.src = 'assets/champion_art/Placeholder_12.png';
-    };
+    // Set the flanking header images
+    const imgLeft = document.getElementById("detail-header-image-left");
+    const imgRight = document.getElementById("detail-header-image-right");
+    const imgPath = `assets/champion_art/${imageName}`;
+    
+    imgLeft.src = imgPath;
+    imgRight.src = imgPath;
+
+    imgLeft.onerror = function() { this.onerror = null; this.src = 'assets/champion_art/Placeholder_12.png'; };
+    imgRight.onerror = function() { this.onerror = null; this.src = 'assets/champion_art/Placeholder_12.png'; };
     
     Promise.all([
         fetchCSV("data/Xeryos_Factions_DB.csv"),
@@ -56,7 +60,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     const formattedName = championName.replace(/\s+/g, '_');
     const leaderImg = `assets/leader_art/${formattedName}_Leader.png`;
 
-    // 1. FACTION INFO TAB (Now includes Leader and HQ to save vertical space)
+    // 1. FACTION INFO TAB
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${formatData(faction['Faction Name'])}</h3>
@@ -108,8 +112,8 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         subFactions.forEach(sub => {
             subHtml += `
             <div class="field-note-card">
+                <span class="top-right-badge badge-danger">${formatData(sub['Overall Danger Level'])} Danger</span>
                 <h3>${formatData(sub['Faction Name'])}</h3>
-                <span class="badge badge-danger">${formatData(sub['Overall Danger Level'])} Danger</span>
                 <p class="entity-desc">${formatData(sub['Description'])}</p>
                 <div class="entity-footer">
                     <div class="stat-block"><span class="stat-label">Leader</span> <span class="stat-value">${formatData(sub['Leader Name'])}</span></div>
@@ -132,8 +136,8 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
             let statusBadge = obj['Status'] === 'Ongoing' ? 'badge-highlight' : 'badge-neutral';
             objHtml += `
             <div class="field-note-card">
+                <span class="top-right-badge ${statusBadge}">${formatData(obj['Status'])}</span>
                 <h3>${formatData(obj['Objective Name'])}</h3>
-                <span class="badge ${statusBadge}">${formatData(obj['Status'])}</span>
                 <p class="entity-desc">${formatData(obj['Description'])}</p>
                 <div class="entity-footer">
                     <div class="stat-block"><span class="stat-label">Overseer</span> <span class="stat-value">${formatData(obj['Objective Giver'])}</span></div>
@@ -156,8 +160,8 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         individuals.forEach(ind => {
             indHtml += `
             <div class="field-note-card">
+                <span class="top-right-badge badge-danger">CR: ${formatData(ind['Challenge Rating'])}</span>
                 <h3>${formatData(ind['Name'])}</h3>
-                <span class="badge badge-danger">CR: ${formatData(ind['Challenge Rating'])}</span>
                 <p class="entity-desc">${formatData(ind['Description'])}</p>
                 <div class="entity-footer">
                     <div class="stat-block"><span class="stat-label">Strengths</span> <span class="stat-value">${formatData(ind['Strengths'])}</span></div>
