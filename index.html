@@ -38,10 +38,11 @@
             <!-- The Main Manuscript Page -->
             <div class="grimoire-page">
                 
-                <!-- Inline Title & Art (Always visible) -->
+                <!-- Inline Title & Art (Flanked) -->
                 <div class="grimoire-title-inline">
-                    <img id="detail-header-image" src="" alt="Champion Seal" onclick="openLightbox(this.src)">
+                    <img id="detail-header-image-left" class="header-art-img" src="" alt="Seal Left" onclick="openLightbox(this.src)">
                     <h2 id="detail-title">Champion Name</h2>
+                    <img id="detail-header-image-right" class="header-art-img flipped" src="" alt="Seal Right" onclick="openLightbox(this.src)">
                 </div>
 
                 <!-- Manuscript Data -->
@@ -53,11 +54,12 @@
                 </div>
             </div>
 
-           <!-- Inline Title & Art (Flanked) -->
-            <div class="grimoire-title-inline">
-                <img id="detail-header-image-left" class="header-art-img" src="" alt="Seal Left" onclick="openLightbox(this.src)">
-                <h2 id="detail-title">Champion Name</h2>
-                <img id="detail-header-image-right" class="header-art-img flipped" src="" alt="Seal Right" onclick="openLightbox(this.src)">
+            <!-- The Leather Bookmarks -->
+            <div class="grimoire-bookmarks">
+                <button class="bookmark-link active" onclick="openTab(event, 'tab-faction')">Faction Info</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-subfactions')">Sub-Factions</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-objectives')">Objectives</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-individuals')">Individuals</button>
             </div>
 
         </div>
