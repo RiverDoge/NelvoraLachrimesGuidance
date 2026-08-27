@@ -8,7 +8,7 @@
 </head>
 <body class="theme-xeryos">
 
-    <header>
+    <header id="main-header">
         <h1>Forces of Xeryos</h1>
     </header>
 
@@ -30,27 +30,42 @@
     </main>
 
     <section id="champion-details" class="hidden">
-        <div class="detail-header">
-            <button class="back-btn" onclick="returnToGrid()">Return to Champions</button>
-            <div class="title-group">
-                <div class="header-art-container">
-                    <img id="detail-header-image" src="" alt="Champion Art" onclick="openLightbox(this.src)">
+        <div class="grimoire-wrapper">
+            
+            <!-- The Main Manuscript Page -->
+            <div class="grimoire-page">
+                <div class="grimoire-nav">
+                    <button class="back-btn" onclick="returnToGrid()">&#8592; Return</button>
+                    <div class="grimoire-title">
+                        <div class="header-art-container">
+                            <img id="detail-header-image" src="" alt="Champion Seal" onclick="openLightbox(this.src)">
+                        </div>
+                        <h2 id="detail-title">Champion Name</h2>
+                    </div>
+                    <div style="width: 100px;"></div> <!-- Spacer for flex centering -->
                 </div>
-                <h2 id="detail-title">Champion Name</h2>
-            </div>
-        </div>
-        
-        <div class="tab-menu">
-            <button class="tab-link active" onclick="openTab(event, 'tab-faction')">Faction Info</button>
-            <button class="tab-link" onclick="openTab(event, 'tab-subfactions')">Sub-Factions</button>
-            <button class="tab-link" onclick="openTab(event, 'tab-objectives')">Objectives</button>
-            <button class="tab-link" onclick="openTab(event, 'tab-individuals')">Individuals</button>
-        </div>
 
-        <div id="tab-faction" class="tab-content active"></div>
-        <div id="tab-subfactions" class="tab-content"></div>
-        <div id="tab-objectives" class="tab-content"></div>
-        <div id="tab-individuals" class="tab-content"></div>
+                <!-- Base Information -->
+                <div id="base-info-container"></div>
+
+                <!-- Manuscript Data -->
+                <div class="manuscript-content">
+                    <div id="tab-doctrine" class="tab-content active"></div>
+                    <div id="tab-subfactions" class="tab-content"></div>
+                    <div id="tab-objectives" class="tab-content"></div>
+                    <div id="tab-individuals" class="tab-content"></div>
+                </div>
+            </div>
+
+            <!-- The Leather Bookmarks -->
+            <div class="grimoire-bookmarks">
+                <button class="bookmark-link active" onclick="openTab(event, 'tab-doctrine')">Doctrine</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-subfactions')">Sub-Factions</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-objectives')">Objectives</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-individuals')">Individuals</button>
+            </div>
+
+        </div>
     </section>
 
     <!-- Lightbox Modal -->
