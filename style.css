@@ -234,9 +234,9 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 
 .leader-combo-box {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 30px;
     position: relative; 
     min-height: 230px;
@@ -248,14 +248,13 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     padding: 30px; 
 }
 
-/* --- OVERLAPPING PORTRAIT WRAPPER --- */
 .leader-portrait-wrapper {
     position: absolute;
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    width: 175px; 
-    height: 175px;
+    width: 170px; 
+    height: 170px;
     z-index: 2;
     cursor: pointer;
     transition: filter 0.2s ease;
@@ -276,11 +275,11 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .leader-portrait-wrapper::after {
     content: '';
     position: absolute;
-    top: -6px; left: -6px; right: -6px; bottom: -6px;
+    top: -20px; left: -20px; right: -20px; bottom: -20px;
     border-style: solid;
-    border-width: 20px; /* Slightly increased to cover the slice fully */
+    border-width: 40px;
     border-image-source: url('assets/UI/portraitframe.png');
-    border-image-slice: 40; /* Increased to protect your deeper corner designs from warping */
+    border-image-slice: 40; 
     pointer-events: none; 
     z-index: 2;
 }
@@ -290,8 +289,20 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     flex-shrink: 0;
 }
 
+.leader-info-card {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
 @media (max-width: 650px) {
-    .leader-combo-box { padding-top: 180px; }
+    .leader-combo-box { 
+        flex-direction: column;
+        padding-top: 180px; 
+    }
     .leader-portrait-wrapper { left: 50%; top: 30px; transform: translateX(-50%); }
     .leader-spacer { display: none; }
 }
@@ -478,7 +489,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     display: block;
     max-width: 85vw;
     max-height: 85vh;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1; 
     object-fit: cover;
     position: relative;
     z-index: 1;
@@ -487,9 +498,9 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 #lightbox-wrapper::after {
     content: '';
     position: absolute;
-    top: -10px; left: -10px; right: -10px; bottom: -10px; 
+    top: -20px; left: -20px; right: -20px; bottom: -20px; 
     border-style: solid;
-    border-width: 30px;
+    border-width: 40px;
     border-image-source: url('assets/UI/portraitframe.png');
     border-image-slice: 40;
     pointer-events: none;
