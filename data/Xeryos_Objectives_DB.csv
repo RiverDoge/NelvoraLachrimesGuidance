@@ -1,6 +1,7 @@
 Champion,Faction Name,Objective Name,Description,Reward,Status,Location,Objective Giver,Difficulty
 Cherished,Cult of the Cherished,Secure the Temple,Defend against the incoming raid,Gold,Ongoing,Temple Grounds,Leader A,Medium
 The Reverent Heart,Church of the Reverent Heart,Recover the Relic,Find the lost holy artifact,Silver,Planned,Ruins,Leader B,Hard
+The Reverent Heart,Church of the Reverent Heart,,,,,,,
 Voice of the Archon,Order of the Archon,Hold the Line,Maintain the frontline defense,Bronze,Ongoing,Citadel Outskirts,Leader C,Extreme
 Scorned Blades,Legion of Scorned Blades,Objective 1,Pending objective description,None,Planned,Unknown,Unknown,Unknown
 Morning’s Song,Choir of Morning’s Song,Objective 1,Pending objective description,None,Planned,Unknown,Unknown,Unknown
