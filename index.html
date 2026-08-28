@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 <body class="theme-xeryos">
-<body class="theme-xeryos">
 
     <button id="return-btn" class="fixed-return-btn hidden" onclick="returnToGrid()">&#8592; Return</button>
 
@@ -46,7 +45,7 @@
                     <img id="detail-header-image-right" class="header-art-img flipped" src="" alt="Seal Right" onclick="openLightbox(this.src)">
                 </div>
 
-                <div class="grimoire-content">
+                <div class="manuscript-content">
                     <div id="tab-faction" class="tab-content active"></div>
                     <div id="tab-subfactions" class="tab-content"></div>
                     <div id="tab-objectives" class="tab-content"></div>
@@ -64,8 +63,11 @@
         </div>
     </section>
 
+    <!-- Wrapped Lightbox Content -->
     <div id="lightbox" class="hidden" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="Full Size Art">
+        <div id="lightbox-wrapper">
+            <img id="lightbox-img" src="" alt="Full Size Art">
+        </div>
     </div>
 
     <script src="app.js"></script>

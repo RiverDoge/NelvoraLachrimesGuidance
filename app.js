@@ -66,7 +66,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     
     const uniqueFactions = [...new Set(allFactions.filter(f => f && f.trim() !== '' && f.toLowerCase() !== 'unknown' && f.toLowerCase() !== 'n/a'))];
 
-    // 1. FACTION INFO TAB
+    // FACTION INFO TAB
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${formatData(faction['Faction Name'])}</h3>
@@ -74,11 +74,12 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="leader-combo-box">
-            <div class="leader-portrait-frame">
-                <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-large" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            
+            <div class="leader-portrait-wrapper" onclick="openLightbox('${leaderImg}')">
+                <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-img" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             </div>
             
-            <div class="leader-info-block">
+            <div class="leader-info-card">
                 <div class="leader-title-wrap">
                     <span class="stat-label">Faction Leader</span>
                     <h4>${formatData(faction['Leader Name'])}</h4>
@@ -116,7 +117,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
     `;
 
-    // 2. SUB-FACTIONS TAB (Kept fully open)
+    // SUB-FACTIONS TAB
     let subHtml = '<div class="entity-grid">';
     if (subFactions.length === 0) {
         subHtml += "<p class='ghost-text' style='grid-column: 1 / -1;'>No sub-factions recorded.</p>";
@@ -139,7 +140,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     subHtml += '</div>';
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // 3. OBJECTIVES TAB (Description moved inside expansion)
+    // OBJECTIVES TAB
     let objHtml = '';
     if (objectives.length === 0) {
         objHtml += "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No active objectives recorded.</p></div>";
@@ -179,7 +180,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     }
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 4. INDIVIDUALS TAB (Description moved inside expansion)
+    // 4. INDIVIDUALS TAB
     let indHtml = '';
     if (individuals.length === 0) {
         indHtml += "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No notable individuals recorded.</p></div>";
