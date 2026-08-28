@@ -467,10 +467,10 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     z-index: 1;
 }
 
-#lightbox-wrapper::after {
+#lightbox-wrapper.framed-lightbox::after {
     content: '';
     position: absolute;
-    top: -24px; left: -24px; right: -24px; bottom: -24px; 
+    top: -20px; left: -20px; right: -20px; bottom: -20px; 
     border-style: solid;
     border-width: 60px; 
     border-image-source: url('assets/UI/portraitframe.png');

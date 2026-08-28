@@ -66,7 +66,6 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     
     const uniqueFactions = [...new Set(allFactions.filter(f => f && f.trim() !== '' && f.toLowerCase() !== 'unknown' && f.toLowerCase() !== 'n/a'))];
 
-    // FACTION INFO TAB
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${formatData(faction['Faction Name'])}</h3>
@@ -75,7 +74,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         
         <div class="leader-combo-box">
             
-            <div class="leader-portrait-wrapper" onclick="openLightbox('${leaderImg}')">
+            <div class="leader-portrait-wrapper" onclick="openLightbox('${leaderImg}', true)">
                 <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-img" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             </div>
             
@@ -117,7 +116,6 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
     `;
 
-    // SUB-FACTIONS TAB
     let subHtml = '<div class="entity-grid">';
     if (subFactions.length === 0) {
         subHtml += "<p class='ghost-text' style='grid-column: 1 / -1;'>No sub-factions recorded.</p>";
@@ -140,7 +138,6 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     subHtml += '</div>';
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
-    // OBJECTIVES TAB
     let objHtml = '';
     if (objectives.length === 0) {
         objHtml += "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No active objectives recorded.</p></div>";
@@ -180,7 +177,6 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
     }
     document.getElementById("tab-objectives").innerHTML = objHtml;
 
-    // 4. INDIVIDUALS TAB
     let indHtml = '';
     if (individuals.length === 0) {
         indHtml += "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No notable individuals recorded.</p></div>";
@@ -263,10 +259,19 @@ function returnToGrid() {
     document.getElementById("main-header").classList.remove("hidden");
 }
 
-function openLightbox(imgSrc) {
+function openLightbox(imgSrc, isLeader = false) {
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
+    const wrapper = document.getElementById("lightbox-wrapper");
+    
     lightboxImg.src = imgSrc;
+    
+    if (isLeader) {
+        wrapper.classList.add("framed-lightbox");
+    } else {
+        wrapper.classList.remove("framed-lightbox");
+    }
+    
     lightbox.classList.remove("hidden");
 }
 
