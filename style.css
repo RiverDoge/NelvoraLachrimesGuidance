@@ -467,18 +467,6 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     z-index: 1;
 }
 
-#lightbox-wrapper.framed-lightbox::after {
-    content: '';
-    position: absolute;
-    top: -11px; left: -11px; right: -11px; bottom: -11px; 
-    border-style: solid;
-    border-width: 60px; 
-    border-image-source: url('assets/UI/portraitframe.png');
-    border-image-slice: 40;
-    pointer-events: none;
-    z-index: 2;
-}
-
 @keyframes zoomIn {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
