@@ -1,4 +1,3 @@
-/* --- Core Palette --- */
 :root {
     --xeryos-bg: #070707;
     --xeryos-page: #121212;
@@ -99,13 +98,11 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .grimoire-page {
     background: radial-gradient(circle at center, #1a1a1a 0%, var(--xeryos-page) 80%);
     width: 100%;
-    
     border-style: solid;
     border-width: 60px; 
     border-image-source: url('assets/UI/mainframe.png');
     border-image-slice: 150 fill; 
     border-image-repeat: round;
-    
     padding: 10px 40px 40px 40px; 
     margin-top: -30px;
 }
@@ -236,7 +233,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; 
     margin-bottom: 30px;
     position: relative; 
     min-height: 230px;
@@ -277,7 +274,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     position: absolute;
     top: -20px; left: -20px; right: -20px; bottom: -20px;
     border-style: solid;
-    border-width: 40px;
+    border-width: 40px; 
     border-image-source: url('assets/UI/portraitframe.png');
     border-image-slice: 40; 
     pointer-events: none; 
@@ -300,7 +297,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 
 @media (max-width: 650px) {
     .leader-combo-box { 
-        flex-direction: column;
+        flex-direction: column; 
         padding-top: 180px; 
     }
     .leader-portrait-wrapper { left: 50%; top: 30px; transform: translateX(-50%); }
@@ -430,14 +427,14 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 
 .top-right-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.8rem;
+    top: 6px;
+    right: 6px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .badge-danger { background: var(--xeryos-crimson-dark); color: #fff; border: 1px solid var(--xeryos-crimson-bright); }
@@ -469,7 +466,6 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     width: 100%;
 }
 
-/* --- LIGHTBOX & FRAMING --- */
 #lightbox {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-color: rgba(0, 0, 0, 0.9);
@@ -500,7 +496,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     position: absolute;
     top: -20px; left: -20px; right: -20px; bottom: -20px; 
     border-style: solid;
-    border-width: 40px;
+    border-width: 40px; 
     border-image-source: url('assets/UI/portraitframe.png');
     border-image-slice: 40;
     pointer-events: none;
