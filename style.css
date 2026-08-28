@@ -229,9 +229,9 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     position: relative; 
     min-height: 180px;
     border-style: solid;
-    border-width: 15px; 
+    border-width: 10px; 
     border-image-source: url('assets/UI/leadercardframe.png');
-    border-image-slice: 25 fill; 
+    border-image-slice: 20 fill; 
     background: transparent; 
     padding: 20px 30px; 
 }
@@ -283,7 +283,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     justify-content: center;
     position: relative;
     z-index: 1;
-    gap: 8px;
+    gap: 18px;
 }
 
 .leader-info-block {
@@ -298,7 +298,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0px;
+    gap: 4px;
 }
 
 .leader-title-wrap h4 {
@@ -345,7 +345,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-bottom: 5px; 
+    margin-bottom: 10px; 
 }
 .stat-label {
     color: var(--text-muted);
