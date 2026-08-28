@@ -104,6 +104,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     border-width: 60px;
     border-image-source: url('assets/UI/mainframe.png');
     border-image-slice: 150 fill;
+    border-image-repeat: round;
     
     padding: 10px 40px 40px 40px; 
     margin-top: -30px;
