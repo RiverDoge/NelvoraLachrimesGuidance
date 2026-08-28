@@ -74,7 +74,7 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         
         <div class="leader-combo-box">
             
-            <div class="leader-portrait-wrapper" onclick="openLightbox('${leaderImg}', true)">
+            <div class="leader-portrait-wrapper" onclick="openLightbox('${leaderImg}')">
                 <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-img" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             </div>
             
@@ -259,19 +259,11 @@ function returnToGrid() {
     document.getElementById("main-header").classList.remove("hidden");
 }
 
-function openLightbox(imgSrc, isLeader = false) {
+function openLightbox(imgSrc) {
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
-    const wrapper = document.getElementById("lightbox-wrapper");
     
     lightboxImg.src = imgSrc;
-    
-    if (isLeader) {
-        wrapper.classList.add("framed-lightbox");
-    } else {
-        wrapper.classList.remove("framed-lightbox");
-    }
-    
     lightbox.classList.remove("hidden");
 }
 
