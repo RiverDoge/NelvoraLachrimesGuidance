@@ -227,13 +227,13 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     justify-content: space-between; 
     margin-bottom: 30px;
     position: relative; 
-    min-height: 230px;
+    min-height: 200px;
     border-style: solid;
-    border-width: 25px; 
+    border-width: 15px; 
     border-image-source: url('assets/UI/leadercardframe.png');
     border-image-slice: 25 fill; 
     background: transparent; 
-    padding: 30px; 
+    padding: 20px 30px; 
 }
 
 .leader-portrait-wrapper {
@@ -261,7 +261,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .leader-portrait-wrapper::after {
     content: '';
     position: absolute;
-    top: 0px; left: 0px; right: 0px; bottom: 0px;
+    top: -15px; left: -15px; right: -15px; bottom: -15px;
     border-style: solid;
     border-width: 40px; 
     border-image-source: url('assets/UI/portraitframe.png');
@@ -470,9 +470,9 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 #lightbox-wrapper::after {
     content: '';
     position: absolute;
-    top: 0px; left: 0px; right: 0px; bottom: 0px; 
+    top: -40px; left: -40px; right: -40px; bottom: -40px; 
     border-style: solid;
-    border-width: 40px; 
+    border-width: 80px; 
     border-image-source: url('assets/UI/portraitframe.png');
     border-image-slice: 40;
     pointer-events: none;
