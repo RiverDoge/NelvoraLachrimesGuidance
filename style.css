@@ -1,3 +1,4 @@
+/* --- Core Palette --- */
 :root {
     --xeryos-bg: #070707;
     --xeryos-page: #121212;
@@ -226,12 +227,8 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .faction-hero h3 { color: var(--xeryos-crimson-bright); font-size: 2.2rem; margin: 0 0 5px 0; }
 .faction-hero p { color: var(--text-muted); font-size: 1.25rem; margin: 0; font-style: italic; }
 
+
 .leader-combo-box {
-    background: var(--xeryos-card);
-    border: 1px solid var(--xeryos-border);
-    border-top: 3px solid var(--xeryos-crimson-dark);
-    border-radius: 12px;
-    padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -239,6 +236,13 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     margin-bottom: 30px;
     position: relative; 
     min-height: 230px;
+
+    border-style: solid;
+    border-width: 25px;
+    border-image-source: url('assets/UI/leadercardframe.png');
+    border-image-slice: 25 fill;
+    background: transparent;
+    padding: 30px; 
 }
 
 .leader-portrait-large {
@@ -250,10 +254,16 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     height: 180px;
     object-fit: contain;
     cursor: pointer;
-    filter: drop-shadow(0 0 15px var(--xeryos-crimson-dark));
-    transition: transform 0.2s ease;
     z-index: 2;
+
+    border-style: solid;
+    border-width: 15px;
+    border-image-source: url('assets/UI/portraitframe.png');
+    border-image-slice: 15 fill; 
+    padding: 10px;
 }
+
+/* ----------------------------------- */
 
 .leader-spacer {
     width: 180px;
