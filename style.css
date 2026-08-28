@@ -248,12 +248,13 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     padding: 30px; 
 }
 
+/* --- OVERLAPPING PORTRAIT WRAPPER --- */
 .leader-portrait-wrapper {
     position: absolute;
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    width: 175px;
+    width: 175px; 
     height: 175px;
     z-index: 2;
     cursor: pointer;
@@ -277,9 +278,9 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     position: absolute;
     top: -6px; left: -6px; right: -6px; bottom: -6px;
     border-style: solid;
-    border-width: 15px; 
+    border-width: 20px; /* Slightly increased to cover the slice fully */
     border-image-source: url('assets/UI/portraitframe.png');
-    border-image-slice: 15;
+    border-image-slice: 40; /* Increased to protect your deeper corner designs from warping */
     pointer-events: none; 
     z-index: 2;
 }
@@ -457,6 +458,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     width: 100%;
 }
 
+/* --- LIGHTBOX & FRAMING --- */
 #lightbox {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-color: rgba(0, 0, 0, 0.9);
@@ -476,6 +478,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     display: block;
     max-width: 85vw;
     max-height: 85vh;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     position: relative;
     z-index: 1;
@@ -486,9 +489,9 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     position: absolute;
     top: -10px; left: -10px; right: -10px; bottom: -10px; 
     border-style: solid;
-    border-width: 25px; 
+    border-width: 30px;
     border-image-source: url('assets/UI/portraitframe.png');
-    border-image-slice: 15;
+    border-image-slice: 40;
     pointer-events: none;
     z-index: 2;
 }
