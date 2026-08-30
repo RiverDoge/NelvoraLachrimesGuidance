@@ -397,10 +397,8 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .ghost-text { color: #555; font-style: italic; font-weight: normal; }
 
 .entity-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    align-items: start;
+    column-width: 280px;
+    column-gap: 20px;
 }
 
 .subfactions-list {
@@ -421,7 +419,9 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     flex-direction: column;
     align-items: center;
     position: relative; 
-    transition: filter 0.2s ease; 
+    transition: filter 0.2s ease;
+    break-inside: avoid;
+    margin-bottom: 20px;
 }
 
 .field-note-card:hover {
