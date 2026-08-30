@@ -147,14 +147,14 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 
 .corner-seal-left {
     position: absolute;
-    top: 45px;
-    left: 55px;
+    top: 25px;
+    left: 30px;
 }
 
 .corner-seal-right {
     position: absolute;
-    top: 45px;
-    right: 55px;
+    top: 25px;
+    right: 30px;
 }
 
 .grimoire-title-inline {
@@ -168,8 +168,8 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 }
 
 .header-art-img {
-    width: 110px; 
-    height: 110px;
+    width: 130px; 
+    height: 130px;
     object-fit: contain;
     cursor: pointer;
     filter: drop-shadow(0 0 8px var(--xeryos-crimson-bright));
