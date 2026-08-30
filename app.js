@@ -23,6 +23,8 @@ function loadChampionData(championName, imageName) {
     document.getElementById("champion-details").classList.remove("hidden");
     document.getElementById("return-btn").classList.remove("hidden");
     
+    window.scrollTo(0, 0);
+    
     document.getElementById("detail-title").innerText = championName;
     
     const imgLeft = document.getElementById("detail-header-image-left");
@@ -261,6 +263,8 @@ function returnToGrid() {
     document.getElementById("return-btn").classList.add("hidden");
     document.getElementById("champion-selection").classList.remove("hidden");
     document.getElementById("main-header").classList.remove("hidden");
+    
+    window.scrollTo(0, 0);
 }
 
 function openLightbox(imgSrc) {
