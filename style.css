@@ -146,13 +146,20 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 
 .grimoire-title-inline {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+}
+
+.title-row {
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--xeryos-border);
-    margin-bottom: 25px;
 }
 
 .header-art-img {
@@ -172,6 +179,24 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     color: var(--text-main);
     font-size: 2.5rem; 
     letter-spacing: 2px;
+}
+
+.header-divider-img {
+    max-width: 500px;
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.subfaction-divider-img {
+    max-width: 450px;
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 25px auto;
 }
 
 .tab-content { display: none; }
@@ -233,7 +258,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     border-image-source: url('assets/UI/leadercardframe.png');
     border-image-slice: 20 fill; 
     background: transparent; 
-    padding: 20px 30px; 
+    padding: 10px 30px; 
 }
 
 .leader-portrait-wrapper {
@@ -283,15 +308,8 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     justify-content: center;
     position: relative;
     z-index: 1;
-    gap: 18px;
-}
-
-.leader-info-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    z-index: 1;
+    gap: 8px;
+    margin-left: 20px; 
 }
 
 .leader-title-wrap {
@@ -312,6 +330,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     gap: 25px;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 10px;
 }
 
 .info-grid {
@@ -321,11 +340,12 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 }
 
 .info-panel {
-    background: var(--xeryos-card);
-    border: 1px solid var(--xeryos-border);
-    border-top: 3px solid var(--xeryos-crimson-dark);
-    border-radius: 12px; 
-    padding: 20px;
+    background: transparent;
+    border-style: solid;
+    border-width: 16px;
+    border-image-source: url('assets/UI/factioninfoframe_1.png');
+    border-image-slice: 25 fill;
+    padding: 15px 25px 25px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -367,29 +387,33 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     gap: 20px;
 }
 
+.subfactions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
 .field-note-card {
-    background: var(--xeryos-card);
-    border: 1px solid var(--xeryos-crimson-dark);
-    border-radius: 8px; 
-    padding: 20px; 
+    background: transparent;
+    border-style: solid;
+    border-width: 16px;
+    border-image-source: url('assets/UI/factioninfoframe_2.png');
+    border-image-slice: 25 fill;
+    padding: 15px 20px 20px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative; 
-    transition: box-shadow 0.2s ease; 
+    transition: filter 0.2s ease; 
 }
 
 .field-note-card:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    filter: brightness(1.15);
 }
 
 .expandable-card {
     cursor: pointer;
-    border-top: 2px solid var(--xeryos-crimson-dark);
-}
-
-.expandable-card:hover {
-    border-top: 2px solid var(--xeryos-crimson-bright);
 }
 
 .collapsible-stats {

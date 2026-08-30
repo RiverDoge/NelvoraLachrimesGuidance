@@ -73,7 +73,6 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
         
         <div class="leader-combo-box">
-            
             <div class="leader-portrait-wrapper" onclick="openLightbox('${leaderImg}')">
                 <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-img" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
             </div>
@@ -116,11 +115,12 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
         </div>
     `;
 
-    let subHtml = '<div class="entity-grid">';
+    let subHtml = '';
     if (subFactions.length === 0) {
-        subHtml += "<p class='ghost-text' style='grid-column: 1 / -1;'>No sub-factions recorded.</p>";
+        subHtml = "<div class='entity-grid'><p class='ghost-text' style='grid-column: 1 / -1;'>No sub-factions recorded.</p></div>";
     } else {
-        subFactions.forEach(sub => {
+        subHtml = '<div class="subfactions-list">';
+        subFactions.forEach((sub, index) => {
             subHtml += `
             <div class="field-note-card">
                 <span class="top-right-badge badge-danger">${formatData(sub['Overall Danger Level'])} Danger</span>
@@ -133,9 +133,13 @@ function populateTabs(faction, subFactions, objectives, individuals, championNam
                     <div class="stat-block"><span class="stat-label">Enemies</span> <span class="stat-value">${formatData(sub['Enemies'])}</span></div>
                 </div>
             </div>`;
+            
+            if (subFactions.length > 1 && index < subFactions.length - 1) {
+                subHtml += `<img src="assets/UI/horizontalbar_2.png" alt="Divider" class="subfaction-divider-img">`;
+            }
         });
+        subHtml += '</div>';
     }
-    subHtml += '</div>';
     document.getElementById("tab-subfactions").innerHTML = subHtml;
 
     let objHtml = '';

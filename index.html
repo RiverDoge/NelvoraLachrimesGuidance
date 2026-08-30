@@ -2,71 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Forces of Xeryos</title>
+    <title>Xeryos Grimoire</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
 <body class="theme-xeryos">
 
-    <button id="return-btn" class="fixed-return-btn hidden" onclick="returnToGrid()">&#8592; Return</button>
-
     <header id="main-header">
-        <h1>Forces of Xeryos</h1>
+        <h1>Xeryos Champions</h1>
     </header>
 
-    <main id="champion-selection">
-        <div class="champion-grid" id="grid-container">
-            <img src="assets/champion_art/Cherished.png" alt="Cherished" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Cherished', 'Cherished.png')">
-            <img src="assets/champion_art/The_Reverent_Heart.png" alt="The Reverent Heart" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('The Reverent Heart', 'The_Reverent_Heart.png')">
-            <img src="assets/champion_art/Voice_of_the_Archon.png" alt="Voice of the Archon" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Voice of the Archon', 'Voice_of_the_Archon.png')">
-            <img src="assets/champion_art/Scorned_Blades.png" alt="Scorned Blades" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Scorned Blades', 'Scorned_Blades.png')">
-            <img src="assets/champion_art/Mornings_Song.png" alt="Morning’s Song" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Morning’s Song', 'Mornings_Song.png')">
-            <img src="assets/champion_art/The_Pure.png" alt="The Pure" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('The Pure', 'The_Pure.png')">
-            <img src="assets/champion_art/Benevolence.png" alt="Benevolence" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Benevolence', 'Benevolence.png')">
-            <img src="assets/champion_art/Virtuous_Storm.png" alt="Virtuous Storm" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Virtuous Storm', 'Virtuous_Storm.png')">
-            <img src="assets/champion_art/Blessed_Limb_of_Justice.png" alt="Blessed Limb of Justice" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Blessed Limb of Justice', 'Blessed_Limb_of_Justice.png')">
-            <img src="assets/champion_art/Iridescent_Bastion.png" alt="Iridescent Bastion" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Iridescent Bastion', 'Iridescent_Bastion.png')">
-            <img src="assets/champion_art/The_Unfurled.png" alt="The Unfurled" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('The Unfurled', 'The_Unfurled.png')">
-            <img src="assets/champion_art/Placeholder_12.png" alt="Placeholder 12" class="champion-image-btn" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';" onclick="loadChampionData('Placeholder 12', 'Placeholder_12.png')">
-        </div>
-    </main>
+    <main>
+        <button id="return-btn" class="fixed-return-btn hidden" onclick="returnToGrid()">◀ Return to Grid</button>
 
-    <section id="champion-details" class="hidden">
-        <div class="grimoire-wrapper">
-            
-            <div class="grimoire-page">
-                
-                <div class="grimoire-title-inline">
-                    <img id="detail-header-image-left" class="header-art-img" src="" alt="Seal Left" onclick="openLightbox(this.src)">
-                    <h2 id="detail-title">Champion Name</h2>
-                    <img id="detail-header-image-right" class="header-art-img flipped" src="" alt="Seal Right" onclick="openLightbox(this.src)">
-                </div>
+        <section id="champion-selection" class="champion-grid">
+            <img src="assets/champion_art/Lachrime.png" alt="Lachrimé" class="champion-image-btn" onclick="loadChampionData('Lachrimé', 'Lachrime.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Caelum.png" alt="Caelum" class="champion-image-btn" onclick="loadChampionData('Caelum', 'Caelum.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Vespera.png" alt="Vespera" class="champion-image-btn" onclick="loadChampionData('Vespera', 'Vespera.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Ignis.png" alt="Ignis" class="champion-image-btn" onclick="loadChampionData('Ignis', 'Ignis.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Morrigan.png" alt="Morrigan" class="champion-image-btn" onclick="loadChampionData('Morrigan', 'Morrigan.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Sylas.png" alt="Sylas" class="champion-image-btn" onclick="loadChampionData('Sylas', 'Sylas.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Aurelia.png" alt="Aurelia" class="champion-image-btn" onclick="loadChampionData('Aurelia', 'Aurelia.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Zephyr.png" alt="Zephyr" class="champion-image-btn" onclick="loadChampionData('Zephyr', 'Zephyr.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Nyx.png" alt="Nyx" class="champion-image-btn" onclick="loadChampionData('Nyx', 'Nyx.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Thalor.png" alt="Thalor" class="champion-image-btn" onclick="loadChampionData('Thalor', 'Thalor.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Elysia.png" alt="Elysia" class="champion-image-btn" onclick="loadChampionData('Elysia', 'Elysia.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+            <img src="assets/champion_art/Placeholder_12.png" alt="Placeholder" class="champion-image-btn" onclick="loadChampionData('Placeholder', 'Placeholder_12.png')" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
+        </section>
 
-                <div class="manuscript-content">
+        <section id="champion-details" class="hidden">
+            <div class="grimoire-wrapper">
+                <nav class="grimoire-bookmarks">
+                    <button class="bookmark-link active" onclick="openTab(event, 'tab-faction')">Faction</button>
+                    <button class="bookmark-link" onclick="openTab(event, 'tab-subfactions')">Sub-Factions</button>
+                    <button class="bookmark-link" onclick="openTab(event, 'tab-objectives')">Objectives</button>
+                    <button class="bookmark-link" onclick="openTab(event, 'tab-individuals')">Individuals</button>
+                </nav>
+
+                <div class="grimoire-page">
+                    <div class="grimoire-title-inline">
+                        <div class="title-row">
+                            <img id="detail-header-image-left" src="" alt="Seal Left" class="header-art-img" onclick="openLightbox(this.src)">
+                            <h2 id="detail-title">Champion Name</h2>
+                            <img id="detail-header-image-right" src="" alt="Seal Right" class="header-art-img flipped" onclick="openLightbox(this.src)">
+                        </div>
+                        <img src="assets/UI/horizontalbar_1.png" alt="Divider" class="header-divider-img">
+                    </div>
+
                     <div id="tab-faction" class="tab-content active"></div>
                     <div id="tab-subfactions" class="tab-content"></div>
                     <div id="tab-objectives" class="tab-content"></div>
                     <div id="tab-individuals" class="tab-content"></div>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <div class="grimoire-bookmarks">
-                <button class="bookmark-link active" onclick="openTab(event, 'tab-faction')">Faction Info</button>
-                <button class="bookmark-link" onclick="openTab(event, 'tab-subfactions')">Sub-Factions</button>
-                <button class="bookmark-link" onclick="openTab(event, 'tab-objectives')">Objectives</button>
-                <button class="bookmark-link" onclick="openTab(event, 'tab-individuals')">Individuals</button>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Wrapped Lightbox Content -->
     <div id="lightbox" class="hidden" onclick="closeLightbox()">
         <div id="lightbox-wrapper">
-            <img id="lightbox-img" src="" alt="Full Size Art">
+            <img id="lightbox-img" src="" alt="Full Artwork">
         </div>
     </div>
 
