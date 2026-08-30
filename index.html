@@ -39,12 +39,11 @@
             
             <div class="grimoire-page">
                 
+                <img id="detail-header-image-left" class="header-art-img corner-seal-left" src="" alt="Seal Left" onclick="openLightbox(this.src)">
+                <img id="detail-header-image-right" class="header-art-img corner-seal-right flipped" src="" alt="Seal Right" onclick="openLightbox(this.src)">
+                
                 <div class="grimoire-title-inline">
-                    <div class="title-row">
-                        <img id="detail-header-image-left" class="header-art-img" src="" alt="Seal Left" onclick="openLightbox(this.src)">
-                        <h2 id="detail-title">Champion Name</h2>
-                        <img id="detail-header-image-right" class="header-art-img flipped" src="" alt="Seal Right" onclick="openLightbox(this.src)">
-                    </div>
+                    <h2 id="detail-title">Champion Name</h2>
                     <img src="assets/UI/horizontalbar_1.png" alt="Divider" class="header-divider-img">
                 </div>
 
@@ -54,6 +53,8 @@
                     <div id="tab-objectives" class="tab-content"></div>
                     <div id="tab-individuals" class="tab-content"></div>
                 </div>
+
+                <img src="assets/UI/horizontalbar_2.png" alt="Footer Divider" class="footer-divider-img">
             </div>
 
             <div class="grimoire-bookmarks">
@@ -66,7 +67,6 @@
         </div>
     </section>
 
-    <!-- Wrapped Lightbox Content -->
     <div id="lightbox" class="hidden" onclick="closeLightbox()">
         <div id="lightbox-wrapper">
             <img id="lightbox-img" src="" alt="Full Size Art">

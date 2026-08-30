@@ -94,6 +94,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 }
 
 .grimoire-page {
+    position: relative;
     background: radial-gradient(circle at center, #1a1a1a 0%, var(--xeryos-page) 80%);
     width: 100%;
     border-style: solid;
@@ -144,45 +145,40 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     padding-left: 30px; 
 }
 
+.corner-seal-left {
+    position: absolute;
+    top: 45px;
+    left: 55px;
+}
+
+.corner-seal-right {
+    position: absolute;
+    top: 45px;
+    right: 55px;
+}
+
 .grimoire-title-inline {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
+    margin-top: 15px;
     margin-bottom: 25px;
 }
 
-.title-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    width: 100%;
-    flex-wrap: nowrap;
-}
-
 .header-art-img {
-    width: 65px; 
-    height: 65px;
+    width: 110px; 
+    height: 110px;
     object-fit: contain;
     cursor: pointer;
     filter: drop-shadow(0 0 8px var(--xeryos-crimson-bright));
     transition: transform 0.2s ease;
 }
 
-.header-art-img:hover { 
-    filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); 
-}
-
-.header-art-img.flipped { 
-    transform: scaleX(-1); 
-}
-
-.header-art-img.flipped:hover { 
-    filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); 
-}
+.header-art-img:hover { filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); }
+.header-art-img.flipped { transform: scaleX(-1); }
+.header-art-img.flipped:hover { filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); }
 
 .grimoire-title-inline h2 {
     margin: 0;
@@ -207,6 +203,15 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     object-fit: contain;
     display: block;
     margin: 25px auto;
+}
+
+.footer-divider-img {
+    max-width: 500px;
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 40px auto 0 auto;
 }
 
 .tab-content { display: none; }
@@ -319,7 +324,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     position: relative;
     z-index: 1;
     gap: 8px;
-    margin-left: 20px;
+    margin-left: 20px; 
 }
 
 .leader-title-wrap {
@@ -377,20 +382,17 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     gap: 2px;
     margin-bottom: 10px; 
 }
-
 .stat-label {
     color: var(--text-muted);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-
 .stat-value {
     color: var(--text-main);
     font-size: 1.1rem;
     font-weight: bold;
 }
-
 .danger-text { color: var(--xeryos-crimson-bright); font-weight: bold; }
 .ghost-text { color: #555; font-style: italic; font-weight: normal; }
 
@@ -398,7 +400,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-    align-items: flex-start;
+    align-items: start;
 }
 
 .subfactions-list {
