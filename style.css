@@ -149,8 +149,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    padding-bottom: 25px;
+    gap: 15px;
     margin-bottom: 25px;
 }
 
@@ -160,6 +159,8 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     align-items: center;
     justify-content: center;
     gap: 25px;
+    width: 100%;
+    flex-wrap: nowrap;
 }
 
 .header-art-img {
@@ -170,9 +171,18 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     filter: drop-shadow(0 0 8px var(--xeryos-crimson-bright));
     transition: transform 0.2s ease;
 }
-.header-art-img:hover { filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); }
-.header-art-img.flipped { transform: scaleX(-1); }
-.header-art-img.flipped:hover { filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); }
+
+.header-art-img:hover { 
+    filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); 
+}
+
+.header-art-img.flipped { 
+    transform: scaleX(-1); 
+}
+
+.header-art-img.flipped:hover { 
+    filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); 
+}
 
 .grimoire-title-inline h2 {
     margin: 0;
@@ -309,7 +319,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     position: relative;
     z-index: 1;
     gap: 8px;
-    margin-left: 20px; 
+    margin-left: 20px;
 }
 
 .leader-title-wrap {
@@ -367,17 +377,20 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     gap: 2px;
     margin-bottom: 10px; 
 }
+
 .stat-label {
     color: var(--text-muted);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
 .stat-value {
     color: var(--text-main);
     font-size: 1.1rem;
     font-weight: bold;
 }
+
 .danger-text { color: var(--xeryos-crimson-bright); font-weight: bold; }
 .ghost-text { color: #555; font-style: italic; font-weight: normal; }
 
@@ -385,6 +398,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
+    align-items: flex-start;
 }
 
 .subfactions-list {
