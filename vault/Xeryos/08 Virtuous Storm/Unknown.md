@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-A defensive faction focused on structural fortification.

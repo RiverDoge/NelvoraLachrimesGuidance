@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-A legion built on vengeance and martial prowess.

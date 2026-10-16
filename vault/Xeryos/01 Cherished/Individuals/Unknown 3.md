@@ -5,4 +5,3 @@ Weaknesses:
 Allies:
 Enemies:
 ---
-might be a fish

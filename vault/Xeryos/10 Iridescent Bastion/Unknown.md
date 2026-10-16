@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-Heavily armored guardians of critical choke points.

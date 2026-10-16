@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-A vast cult dedicated to the Cherished.

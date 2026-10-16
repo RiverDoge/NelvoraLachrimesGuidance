@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-Zealots focused on eradicating corruption.

@@ -5,4 +5,3 @@ Difficulty:
 Location:
 Reward:
 ---
-Defend against the incoming raid

@@ -5,4 +5,3 @@ Weaknesses:
 Allies:
 Enemies:
 ---
-High ranking official

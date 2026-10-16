@@ -56,7 +56,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 }
 .fixed-return-btn:hover {
     opacity: 1;
-    background: var(--xeryos-panel);
+    background: var(--xeryos-card);
     border-color: var(--xeryos-crimson-bright);
     color: var(--xeryos-crimson-bright);
 }
@@ -80,10 +80,46 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     filter: drop-shadow(0 0 0 rgba(0,0,0,0)); 
 }
 
-.champion-image-btn:hover {
+.champion-image-btn:hover,
+.champion-card:hover .champion-image-btn,
+.champion-card:focus-visible .champion-image-btn {
     transform: translateY(-5px);
     filter: drop-shadow(0 0 15px var(--xeryos-crimson-bright));
 }
+
+.grimoire-page.cover-page { margin-top: 0; padding: 30px 40px 40px 40px; }
+.grimoire-page.cover-page #main-header h1 { margin: 0 0 15px 0; }
+.grimoire-page.cover-page .header-divider-img { margin-bottom: 40px; }
+.grimoire-page.cover-page .champion-grid { row-gap: 30px; }
+
+.champion-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 180px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.champion-card:focus-visible { outline: none; }
+
+.champion-name {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.champion-card:hover .champion-name,
+.champion-card:focus-visible .champion-name { color: var(--xeryos-crimson-bright); }
 
 .hidden { display: none !important; }
 
@@ -290,6 +326,23 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     filter: brightness(1.3);
 }
 
+.leader-portrait-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0d0d0d;
+    cursor: default;
+}
+
+.leader-portrait-empty:hover { filter: none; }
+
+.leader-portrait-empty span {
+    font-family: 'Crimson Text', serif;
+    font-size: 4.5rem;
+    line-height: 1;
+    color: #3a3530;
+}
+
 .leader-portrait-img {
     width: 100%;
     height: 100%;
@@ -394,7 +447,8 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     font-weight: bold;
 }
 .danger-text { color: var(--xeryos-crimson-bright); font-weight: bold; }
-.ghost-text { color: #555; font-style: italic; font-weight: normal; }
+.ghost-text { color: #6f6962; font-style: italic; font-weight: normal; }
+.top-right-badge .ghost-text { color: inherit; opacity: 0.75; }
 
 .entity-grid {
     column-width: 280px;
@@ -554,8 +608,15 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
     body.theme-xeryos { padding: 14px 8px 72px; }
 
     #main-header h1 { font-size: 1.7rem; letter-spacing: 2px; margin: 8px 0 24px; }
+    .grimoire-page.cover-page { padding: 16px 8px 20px; }
+    .grimoire-page.cover-page #main-header h1 { margin: 4px 0 10px; }
+    .grimoire-page.cover-page .header-divider-img { margin-bottom: 20px; }
+    .grimoire-page.cover-page .footer-divider-img { margin-top: 24px; }
 
     .champion-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grimoire-page.cover-page .champion-grid { row-gap: 18px; }
+    .champion-card { gap: 6px; }
+    .champion-name { font-size: 0.95rem; letter-spacing: 0; }
 
     .fixed-return-btn {
         top: auto;

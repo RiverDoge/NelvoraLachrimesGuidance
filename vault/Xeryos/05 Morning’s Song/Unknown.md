@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-Elemental wielders ruling the high peaks.

@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-Archers and bards orchestrating destruction.

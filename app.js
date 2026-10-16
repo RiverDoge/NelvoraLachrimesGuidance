@@ -1,7 +1,9 @@
 const PLACEHOLDER_ART = 'assets/champion_art/Placeholder_12.png';
 const STATUS_BADGES = { ongoing: 'badge-highlight', completed: 'badge-complete', failed: 'badge-failed' };
+const SITE_TITLE = document.title;
 let champions = [];
 let shownChampion = null;
+let placeholderThumb = PLACEHOLDER_ART;
 
 function loadChampions() {
     fetch("data/xeryos.json", { cache: "no-cache" })
@@ -11,6 +13,7 @@ function loadChampions() {
         })
         .then(data => {
             champions = data.champions;
+            placeholderThumb = data.placeholderThumb || PLACEHOLDER_ART;
             renderChampionGrid();
             showRoute();
         })
@@ -20,9 +23,20 @@ function loadChampions() {
         });
 }
 
+function emblemFull(champion) {
+    return champion.emblem || PLACEHOLDER_ART;
+}
+
+function emblemShown(champion) {
+    return champion.emblem ? champion.emblemThumb || champion.emblem : placeholderThumb;
+}
+
 function renderChampionGrid() {
     document.getElementById("grid-container").innerHTML = champions.map((champion, index) => `
-        <img src="${champion.emblem || PLACEHOLDER_ART}" alt="${champion.name}" class="champion-image-btn" onerror="this.onerror=null; this.src='${PLACEHOLDER_ART}';" onclick="loadChampionData(${index})">
+        <button type="button" class="champion-card" onclick="loadChampionData(${index})">
+            <img src="${emblemShown(champion)}" alt="${champion.name}" class="champion-image-btn" onerror="this.onerror=null; this.src='${PLACEHOLDER_ART}';">
+            <span class="champion-name${/^unknown$/i.test(champion.name) ? ' ghost-text' : ''}" aria-hidden="true">${champion.name}</span>
+        </button>
     `).join('');
 }
 
@@ -67,7 +81,8 @@ function formatBody(value) {
 
 function loadChampionData(index) {
     const champion = champions[index];
-    const emblem = champion.emblem || PLACEHOLDER_ART;
+    const emblem = emblemFull(champion);
+    const shown = emblemShown(champion);
     const slug = slugFor(champion);
 
     if (routeSlug() !== slug) history.pushState({ fromGrid: shownChampion === null }, '', `#${slug}`);
@@ -80,21 +95,24 @@ function loadChampionData(index) {
 
     window.scrollTo(0, 0);
 
+    document.title = `${champion.name} · ${SITE_TITLE}`;
     document.getElementById("detail-title").innerText = champion.name;
 
     const imgLeft = document.getElementById("detail-header-image-left");
     const imgRight = document.getElementById("detail-header-image-right");
 
-    imgLeft.src = emblem;
-    imgRight.src = emblem;
+    imgLeft.src = shown;
+    imgRight.src = shown;
+    imgLeft.dataset.full = emblem;
+    imgRight.dataset.full = emblem;
 
     imgLeft.onerror = function() { this.onerror = null; this.src = PLACEHOLDER_ART; };
     imgRight.onerror = function() { this.onerror = null; this.src = PLACEHOLDER_ART; };
 
-    populateTabs(champion.faction, champion.subFactions, champion.objectives, champion.individuals, champion.leaderArt || PLACEHOLDER_ART);
+    populateTabs(champion.faction, champion.subFactions, champion.objectives, champion.individuals, champion.leaderArt, champion.leaderThumb || champion.leaderArt);
 }
 
-function populateTabs(faction, subFactions, objectives, individuals, leaderImg) {
+function populateTabs(faction, subFactions, objectives, individuals, leaderFull, leaderShown) {
     const allFactions = [];
     if (faction['Faction Name']) allFactions.push(faction['Faction Name']);
     subFactions.forEach(sub => { if (sub['Faction Name']) allFactions.push(sub['Faction Name']); });
@@ -103,6 +121,12 @@ function populateTabs(faction, subFactions, objectives, individuals, leaderImg) 
     
     const uniqueFactions = [...new Set(allFactions.filter(f => f && f.trim() !== '' && f.toLowerCase() !== 'unknown' && f.toLowerCase() !== 'n/a'))];
 
+    const leaderPortrait = leaderFull
+        ? `<div class="leader-portrait-wrapper" onclick="openLightbox('${leaderFull}')">
+                <img src="${leaderShown}" alt="Leader Art" class="leader-portrait-img" onerror="this.onerror=null; this.src='${leaderFull}';">
+            </div>`
+        : `<div class="leader-portrait-wrapper leader-portrait-empty"><span>?</span></div>`;
+
     document.getElementById("tab-faction").innerHTML = `
         <div class="faction-hero">
             <h3>${formatData(faction['Faction Name'])}</h3>
@@ -110,10 +134,8 @@ function populateTabs(faction, subFactions, objectives, individuals, leaderImg) 
         </div>
         
         <div class="leader-combo-box">
-            <div class="leader-portrait-wrapper" onclick="openLightbox('${leaderImg}')">
-                <img src="${leaderImg}" alt="Leader Art" class="leader-portrait-img" onerror="this.onerror=null; this.src='assets/champion_art/Placeholder_12.png';">
-            </div>
-            
+            ${leaderPortrait}
+
             <div class="leader-info-card">
                 <div class="leader-title-wrap">
                     <span class="stat-label">Faction Leader</span>
@@ -121,7 +143,7 @@ function populateTabs(faction, subFactions, objectives, individuals, leaderImg) 
                 </div>
                 <div class="leader-stats-row">
                     <div class="stat-block"><span class="stat-label">Combat Style</span><span class="stat-value">${formatData(faction['Combat Style'])}</span></div>
-                    <div class="stat-block"><span class="stat-label">Force Size</span><span class="stat-value">${formatData(faction['Size of Forces'])}</span></div>
+                    <div class="stat-block"><span class="stat-label">Forces</span><span class="stat-value">${formatData(faction['Size of Forces'])}</span></div>
                     <div class="stat-block"><span class="stat-label">Overall Danger</span><span class="stat-value danger-text">${formatData(faction['Overall Danger Level'])}</span></div>
                 </div>
             </div>
@@ -165,7 +187,7 @@ function populateTabs(faction, subFactions, objectives, individuals, leaderImg) 
                 <div class="entity-desc">${formatBody(sub['Description'])}</div>
                 <div class="entity-footer">
                     <div class="stat-block"><span class="stat-label">Leader</span> <span class="stat-value">${formatData(sub['Leader Name'])}</span></div>
-                    <div class="stat-block"><span class="stat-label">Force Size</span> <span class="stat-value">${formatData(sub['Size of Forces'])}</span></div>
+                    <div class="stat-block"><span class="stat-label">Forces</span> <span class="stat-value">${formatData(sub['Size of Forces'])}</span></div>
                     <div class="stat-block"><span class="stat-label">Alliances</span> <span class="stat-value">${formatData(sub['Alliances'])}</span></div>
                     <div class="stat-block"><span class="stat-label">Enemies</span> <span class="stat-value">${formatData(sub['Enemies'])}</span></div>
                 </div>
@@ -305,7 +327,8 @@ function showGrid() {
     document.getElementById("return-btn").classList.add("hidden");
     document.getElementById("champion-selection").classList.remove("hidden");
     document.getElementById("main-header").classList.remove("hidden");
-    
+    document.title = SITE_TITLE;
+
     window.scrollTo(0, 0);
 }
 

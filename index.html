@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Forces of Xeryos</title>
+    <meta name="description" content="Lachrimé's guidance on the champions of Xeryos and those who follow them.">
+    <meta name="theme-color" content="#cc1133">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Forces of Xeryos">
+    <meta property="og:description" content="Lachrimé's guidance on the champions of Xeryos and those who follow them.">
+    <meta property="og:url" content="https://riverdoge.github.io/NelvoraLachrimesGuidance/">
+    <meta property="og:image" content="https://riverdoge.github.io/NelvoraLachrimesGuidance/assets/champion_art/Placeholder_12.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
@@ -14,12 +21,19 @@
 
     <button id="return-btn" class="fixed-return-btn hidden" onclick="returnToGrid()">&#8592; Return</button>
 
-    <header id="main-header">
-        <h1>Forces of Xeryos</h1>
-    </header>
-
     <main id="champion-selection">
-        <div class="champion-grid" id="grid-container"></div>
+        <div class="grimoire-wrapper">
+            <div class="grimoire-page cover-page">
+                <header id="main-header">
+                    <h1>Forces of Xeryos</h1>
+                    <img src="assets/UI/horizontalbar_1.png" alt="" class="header-divider-img">
+                </header>
+
+                <div class="champion-grid" id="grid-container"></div>
+
+                <img src="assets/UI/horizontalbar_2.png" alt="" class="footer-divider-img">
+            </div>
+        </div>
     </main>
 
     <section id="champion-details" class="hidden">
@@ -27,8 +41,8 @@
             
             <div class="grimoire-page">
                 
-                <img id="detail-header-image-left" class="header-art-img corner-seal-left" src="" alt="Seal Left" onclick="openLightbox(this.src)">
-                <img id="detail-header-image-right" class="header-art-img corner-seal-right flipped" src="" alt="Seal Right" onclick="openLightbox(this.src)">
+                <img id="detail-header-image-left" class="header-art-img corner-seal-left" src="" alt="Seal Left" onclick="openLightbox(this.dataset.full || this.src)">
+                <img id="detail-header-image-right" class="header-art-img corner-seal-right flipped" src="" alt="Seal Right" onclick="openLightbox(this.dataset.full || this.src)">
                 
                 <div class="grimoire-title-inline">
                     <h2 id="detail-title">Champion Name</h2>

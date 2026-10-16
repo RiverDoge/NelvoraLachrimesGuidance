@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-The strict militant arm of the Archon.

@@ -18,4 +18,3 @@ Enemies:
 Likes:
 Dislikes:
 ---
-The vanguard cavalry force.
