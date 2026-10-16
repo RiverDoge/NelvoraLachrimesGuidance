@@ -39,7 +39,7 @@ Xeryos/
 
 - An *Unknown* card only hides the name. Any properties or description you fill in still show on it.
 - `%% comments %%` are hidden on the site, but anyone can read the notes on GitHub, comments included.
-- Each champion has its own link, e.g. `.../NelvoraLachrimesGuidance/#the-reverent-heart`, handy for pointing players at a page.
+- Each champion has its own link, e.g. `.../NelvoraLachrimesGuidance/#TheReverentHeart`, handy for pointing players at a page.
 
 ## If the site doesn't update
 

@@ -38,14 +38,20 @@ function renderChampionGrid() {
     `).join('');
 }
 
+function plainLetters(text) {
+    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/['’]/g, '');
+}
+
 function slugFor(champion) {
-    return champion.name
-        .normalize('NFD')
-        .replace(/[̀-ͯ]/g, '')
-        .toLowerCase()
-        .replace(/['’]/g, '')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
+    return plainLetters(champion.name)
+        .split(/[^A-Za-z0-9]+/)
+        .filter(Boolean)
+        .map(word => word[0].toUpperCase() + word.slice(1))
+        .join('');
+}
+
+function linkKey(text) {
+    return plainLetters(text).toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
 function routeSlug() {
@@ -57,7 +63,7 @@ function routeSlug() {
 }
 
 function showRoute() {
-    const index = champions.findIndex(champion => slugFor(champion) === routeSlug());
+    const index = champions.findIndex(champion => linkKey(slugFor(champion)) === linkKey(routeSlug()));
     if (index === -1) {
         if (shownChampion !== null) showGrid();
         return;
@@ -83,7 +89,8 @@ function loadChampionData(index) {
     const shown = emblemShown(champion);
     const slug = slugFor(champion);
 
-    if (routeSlug() !== slug) history.pushState({ fromGrid: shownChampion === null }, '', `#${slug}`);
+    if (linkKey(routeSlug()) !== linkKey(slug)) history.pushState({ fromGrid: shownChampion === null }, '', `#${slug}`);
+    else if (routeSlug() !== slug) history.replaceState(history.state, '', `#${slug}`);
     shownChampion = index;
 
     document.getElementById("main-header").classList.add("hidden");
