@@ -4,7 +4,6 @@ import sharp from 'sharp';
 
 const SITE = process.argv[2] || '_site';
 const DATA = path.join(SITE, 'data', 'xeryos.json');
-const PLACEHOLDER = 'assets/champion_art/Placeholder_12.png';
 const SIZE = 400;
 
 const made = new Map();
@@ -31,7 +30,6 @@ for (const champion of data.champions) {
     champion.emblemThumb = await makeThumb(champion.emblem);
     champion.leaderThumb = await makeThumb(champion.leaderArt);
 }
-data.placeholderThumb = await makeThumb(PLACEHOLDER);
 fs.writeFileSync(DATA, JSON.stringify(data, null, 2));
 
 const sizeOf = url => fs.statSync(path.join(SITE, decodeURIComponent(url))).size;

@@ -10,7 +10,7 @@
     <meta property="og:title" content="Forces of Xeryos">
     <meta property="og:description" content="Lachrimé's guidance on the champions of Xeryos and those who follow them.">
     <meta property="og:url" content="https://riverdoge.github.io/NelvoraLachrimesGuidance/">
-    <meta property="og:image" content="https://riverdoge.github.io/NelvoraLachrimesGuidance/assets/champion_art/Placeholder_12.png">
+    <meta property="og:image" content="https://riverdoge.github.io/NelvoraLachrimesGuidance/vault/Xeryos/02%20The%20Reverent%20Heart/Emblem.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
@@ -41,8 +41,8 @@
             
             <div class="grimoire-page">
                 
-                <img id="detail-header-image-left" class="header-art-img corner-seal-left" src="" alt="Seal Left" onclick="openLightbox(this.dataset.full || this.src)">
-                <img id="detail-header-image-right" class="header-art-img corner-seal-right flipped" src="" alt="Seal Right" onclick="openLightbox(this.dataset.full || this.src)">
+                <img id="detail-header-image-left" class="header-art-img corner-seal-left" src="" alt="Seal Left" onclick="if (this.dataset.full) openLightbox(this.dataset.full)">
+                <img id="detail-header-image-right" class="header-art-img corner-seal-right flipped" src="" alt="Seal Right" onclick="if (this.dataset.full) openLightbox(this.dataset.full)">
                 
                 <div class="grimoire-title-inline">
                     <h2 id="detail-title">Champion Name</h2>

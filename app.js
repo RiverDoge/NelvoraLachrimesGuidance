@@ -1,9 +1,8 @@
-const PLACEHOLDER_ART = 'assets/champion_art/Placeholder_12.png';
+const UNKNOWN_EMBLEM = 'assets/UI/unknown_emblem.svg';
 const STATUS_BADGES = { ongoing: 'badge-highlight', completed: 'badge-complete', failed: 'badge-failed' };
 const SITE_TITLE = document.title;
 let champions = [];
 let shownChampion = null;
-let placeholderThumb = PLACEHOLDER_ART;
 
 function loadChampions() {
     fetch("data/xeryos.json", { cache: "no-cache" })
@@ -13,7 +12,6 @@ function loadChampions() {
         })
         .then(data => {
             champions = data.champions;
-            placeholderThumb = data.placeholderThumb || PLACEHOLDER_ART;
             renderChampionGrid();
             showRoute();
         })
@@ -24,17 +22,17 @@ function loadChampions() {
 }
 
 function emblemFull(champion) {
-    return champion.emblem || PLACEHOLDER_ART;
+    return champion.emblem || '';
 }
 
 function emblemShown(champion) {
-    return champion.emblem ? champion.emblemThumb || champion.emblem : placeholderThumb;
+    return champion.emblem ? champion.emblemThumb || champion.emblem : UNKNOWN_EMBLEM;
 }
 
 function renderChampionGrid() {
     document.getElementById("grid-container").innerHTML = champions.map((champion, index) => `
         <button type="button" class="champion-card" onclick="loadChampionData(${index})">
-            <img src="${emblemShown(champion)}" alt="${champion.name}" class="champion-image-btn" onerror="this.onerror=null; this.src='${PLACEHOLDER_ART}';">
+            <img src="${emblemShown(champion)}" alt="${champion.name}" class="champion-image-btn" onerror="this.onerror=null; this.src='${UNKNOWN_EMBLEM}';">
             <span class="champion-name${/^unknown$/i.test(champion.name) ? ' ghost-text' : ''}" aria-hidden="true">${champion.name}</span>
         </button>
     `).join('');
@@ -105,9 +103,11 @@ function loadChampionData(index) {
     imgRight.src = shown;
     imgLeft.dataset.full = emblem;
     imgRight.dataset.full = emblem;
+    imgLeft.classList.toggle("no-zoom", !emblem);
+    imgRight.classList.toggle("no-zoom", !emblem);
 
-    imgLeft.onerror = function() { this.onerror = null; this.src = PLACEHOLDER_ART; };
-    imgRight.onerror = function() { this.onerror = null; this.src = PLACEHOLDER_ART; };
+    imgLeft.onerror = function() { this.onerror = null; this.src = UNKNOWN_EMBLEM; };
+    imgRight.onerror = function() { this.onerror = null; this.src = UNKNOWN_EMBLEM; };
 
     populateTabs(champion.faction, champion.subFactions, champion.objectives, champion.individuals, champion.leaderArt, champion.leaderThumb || champion.leaderArt);
 }

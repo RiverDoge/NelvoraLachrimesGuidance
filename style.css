@@ -215,6 +215,7 @@ h1, h2, h3, h4, .faction-desc, .entity-desc {
 .header-art-img:hover { filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); }
 .header-art-img.flipped { transform: scaleX(-1); }
 .header-art-img.flipped:hover { filter: drop-shadow(0 0 12px var(--xeryos-crimson-bright)) brightness(1.2); }
+.header-art-img.no-zoom { cursor: default; }
 
 .grimoire-title-inline h2 {
     margin: 0;

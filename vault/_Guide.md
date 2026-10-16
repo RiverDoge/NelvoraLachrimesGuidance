@@ -32,7 +32,7 @@ Xeryos/
 - **Undiscovered slots:** name a note `Unknown`, `Unknown 2` and so on. It shows as an *Unknown* card. Rename it once the party finds out who or what it is.
 - **Order:** cards are alphabetical, with undiscovered ones last. Put a number in front (`01 Gregory`, `03 Unknown`) to force an order. The number is not shown.
 - **Objective status:** `Ongoing` is highlighted, `Completed` is muted and `Failed` is struck through. Anything else (like `Planned`) shows plainly.
-- **Art:** `Emblem` and `Leader` images go in the champion folder (png, jpg or webp). Without them the placeholder is used, and a champion with no `Leader` image shows an empty frame. Use the full-size art: the site shows small copies on the page and opens the full image when someone clicks it.
+- **Art:** `Emblem` and `Leader` images go in the champion folder (png, jpg or webp). A champion with no `Emblem` shows a "?" emblem, and one with no `Leader` image shows an empty frame. Use the full-size art: the site shows small copies on the page and opens the full image when someone clicks it.
 - **Names with `:` `?` or `"`:** file names can't have these, so add a `Name` property with the real name.
 
 ## What players can see
