@@ -110,6 +110,7 @@ function loadChampionData(index) {
     imgRight.onerror = function() { this.onerror = null; this.src = UNKNOWN_EMBLEM; };
 
     populateTabs(champion.faction, champion.subFactions, champion.objectives, champion.individuals, champion.leaderArt, champion.leaderThumb || champion.leaderArt);
+    showTab(rememberedTabs()[slug] || "tab-faction");
 }
 
 function populateTabs(faction, subFactions, objectives, individuals, leaderFull, leaderShown) {
@@ -301,18 +302,38 @@ function filterCards(tabId, selectedFaction) {
 }
 
 function openTab(evt, tabId) {
+    showTab(tabId);
+    if (shownChampion !== null) rememberTab(slugFor(champions[shownChampion]), tabId);
+}
+
+function showTab(tabId) {
     const tabContents = document.getElementsByClassName("tab-content");
     for (let i = 0; i < tabContents.length; i++) {
-        tabContents[i].classList.remove("active");
+        tabContents[i].classList.toggle("active", tabContents[i].id === tabId);
     }
-    
+
     const tabLinks = document.getElementsByClassName("bookmark-link");
     for (let i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].classList.remove("active");
+        tabLinks[i].classList.toggle("active", tabLinks[i].dataset.tab === tabId);
     }
-    
-    document.getElementById(tabId).classList.add("active");
-    evt.currentTarget.classList.add("active");
+}
+
+function rememberedTabs() {
+    try {
+        return JSON.parse(sessionStorage.getItem("lastTabs")) || {};
+    } catch (error) {
+        return {};
+    }
+}
+
+function rememberTab(slug, tabId) {
+    const tabs = rememberedTabs();
+    tabs[slug] = tabId;
+    try {
+        sessionStorage.setItem("lastTabs", JSON.stringify(tabs));
+    } catch (error) {
+        return;
+    }
 }
 
 function returnToGrid() {
