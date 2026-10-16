@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Forces of Xeryos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/18.1.0/lib/marked.umd.min.js"></script>
+</head>
+<body class="theme-xeryos">
+
+    <button id="return-btn" class="fixed-return-btn hidden" onclick="returnToGrid()">&#8592; Return</button>
+
+    <header id="main-header">
+        <h1>Forces of Xeryos</h1>
+    </header>
+
+    <main id="champion-selection">
+        <div class="champion-grid" id="grid-container"></div>
+    </main>
+
+    <section id="champion-details" class="hidden">
+        <div class="grimoire-wrapper">
+            
+            <div class="grimoire-page">
+                
+                <img id="detail-header-image-left" class="header-art-img corner-seal-left" src="" alt="Seal Left" onclick="openLightbox(this.src)">
+                <img id="detail-header-image-right" class="header-art-img corner-seal-right flipped" src="" alt="Seal Right" onclick="openLightbox(this.src)">
+                
+                <div class="grimoire-title-inline">
+                    <h2 id="detail-title">Champion Name</h2>
+                    <img src="assets/UI/horizontalbar_1.png" alt="Divider" class="header-divider-img">
+                </div>
+
+                <div class="manuscript-content">
+                    <div id="tab-faction" class="tab-content active"></div>
+                    <div id="tab-subfactions" class="tab-content"></div>
+                    <div id="tab-objectives" class="tab-content"></div>
+                    <div id="tab-individuals" class="tab-content"></div>
+                </div>
+
+                <img src="assets/UI/horizontalbar_2.png" alt="Footer Divider" class="footer-divider-img">
+            </div>
+
+            <div class="grimoire-bookmarks">
+                <button class="bookmark-link active" onclick="openTab(event, 'tab-faction')">Faction Info</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-subfactions')">Sub-Factions</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-objectives')">Objectives</button>
+                <button class="bookmark-link" onclick="openTab(event, 'tab-individuals')">Individuals</button>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="lightbox" class="hidden" onclick="closeLightbox()">
+        <div id="lightbox-wrapper">
+            <img id="lightbox-img" src="" alt="Full Size Art">
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

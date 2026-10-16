@@ -1,0 +1,10 @@
+{
+  "name": "nelvora-lachrimes-guidance",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-vault.mjs"
+  },
+  "dependencies": {
+    "js-yaml": "^5.4.3"
+  }
+}
